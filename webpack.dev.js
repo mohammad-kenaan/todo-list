@@ -1,9 +1,5 @@
-
-
-
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
-
 
 module.exports = 
 
@@ -13,9 +9,7 @@ module.exports =
       mode: "development",
       devtool: "eval-source-map",
       devServer: {
-          watchFiles: ["./src/*.html"],
-          hot: true,
-          static: './dist',
+          watchFiles: ["./src/*.html"]
       }
     }
   )
