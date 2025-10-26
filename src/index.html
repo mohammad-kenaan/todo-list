@@ -82,6 +82,52 @@
       </div>
     </div>
   </div>
+
+  <dialog id="dialog">
+
+    <form id="my-form" autofocus>
+
+      <fieldset class="dialog-card-content">
+        <legend>Todo Details</legend>
+        <div class="dialog-form-container">
+
+          <p>
+            <label for="title">Title</label>
+          </p>
+          <p> <input type="text" name="title" id="title"> </p>
+
+          <p>
+            <label for="priority">Priority</label>
+          </p>
+          <p> <input type="number" name="priority" id="priority"> </p>
+
+
+          <p>
+            <label for="">Due date </label>
+          </p>
+          <!--    edit the next input  -->
+          <p> <input type="tel" name="due-date" id="due-date"></p>
+
+        </div>
+
+        <fieldset id="textarea">
+          <legend>Description</legend>
+          <textarea name="description" id="description"></textarea>
+        </fieldset>
+
+      </fieldset>
+
+
+      <div class="dialog-card-info">
+        <button id="cancel" formmethod="dialog">Cancel</button>
+        <button formmethod="dialog" id="confirmBtn" type="button">Confirm</button>
+      </div>
+
+    </form>
+  </dialog>
+
+
+
 </body>
 
 </html>

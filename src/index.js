@@ -5,6 +5,7 @@ import "./reset.css";
 import "./style.css";
 import { createTodoEle } from "./createTodoItem.js";
 import { showItems } from "./itemsDisplay.js";
+import "./dialogForm.js";
 
 const todoListArr = [];
 const addTask = document.querySelector('.menu-add-task');

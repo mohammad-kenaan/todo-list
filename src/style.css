@@ -280,3 +280,124 @@ body {
   }
 
 }
+
+
+
+ /* ----------------Dialog Style start-------------- */
+
+    dialog[open] {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    dialog {
+      opacity: 0;
+      transform: scaleY(0);
+      transition:
+        opacity 0.7s ease-out,
+        transform 0.7s ease-out,
+        overlay 0.7s ease-out allow-discrete,
+        display 0.7s ease-out allow-discrete;
+    }
+
+    @starting-style {
+      dialog:open {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+    }
+
+    dialog::backdrop {
+      background-image: linear-gradient(45deg,
+          magenta,
+          rebeccapurple,
+          dodgerblue,
+          green);
+      opacity: 0.75;
+      background-color: rgb(0 0 0 / 0%);
+      transition:
+        display 0.7s allow-discrete,
+        overlay 0.7s allow-discrete,
+        background-color 0.7s;
+    }
+
+    dialog:open::backdrop {
+      background-color: rgb(0 0 0 / 25%);
+    }
+
+
+    @starting-style {
+      dialog:open::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+      }
+    }
+
+    /* ---------Dialog Style end----- */
+
+    /* ------Form in Dialog Style start------ */
+
+    dialog form {
+      padding: 25px;
+      max-width: 750px;
+
+      fieldset {
+        padding: 20px 50px;
+        border: 1px solid gray;
+        text-align: start;
+      }
+    }
+
+    dialog form .dialog-card-content {
+      margin-top: 40px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+
+      .dialog-form-container {
+
+        p label {
+          margin-right: 80px;
+          font-weight: 600;
+        }
+
+        p input {
+          padding-left: 7px;
+          border-bottom: 1px solid gray;
+          margin-bottom: 2em;
+        }
+      }
+
+      #textarea {
+        padding: 5px;
+        flex-grow: 1;
+
+        legend {
+          font-weight: 600;
+        }
+
+        textarea {
+          height: 200px;
+          width: 100%;
+          padding: 15px;
+        }
+      }
+    }
+
+    dialog form .dialog-card-info {
+
+      button {
+        padding: 0.5em 3em;
+        background-color: #008000;
+        color: white;
+        border-radius: 15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      #cancel {
+        background-color: #c52d07;
+        margin: 30px;
+      }
+    }
+
+    /* ----Form in Dialog Style end------ */
