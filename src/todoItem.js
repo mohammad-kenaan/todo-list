@@ -1,32 +1,37 @@
 
 
-export function createTodoEle() {
+export function createTodoEle(task) {
 
   const todoItem = createEle("div", "todo-item");
-  const itemId =  new Date().getTime();
-  todoItem.dataset.id = itemId;
+  todoItem.dataset.id = task.id;
   // ----------- Head
   const head = createEle("h1", "head");
-  head.textContent = "Morning Study";
+  head.textContent = task.title;
 
   const mainDescripton = createEle("div", "main-descripton");
   const mainDescriptonSpan = createEle("span", "main-descripton-span");
-   const mainDescriptonP = createEle("p", "main-descripton-p");
+  const mainDescriptonP = createEle("p", "main-descripton-p");
 
   mainDescriptonSpan.textContent = "Description";
-  mainDescriptonP.textContent = "Some Description"
+  mainDescriptonP.textContent = task.description;
 
   const dueDate = createEle("div", "due-date");
   const dueDateSpan = createEle("span", "due-date-span");
   dueDateSpan.textContent = "Due date: ";
 
   const dueDateP = createEle("p", "due-date-p");
-  dueDateP.textContent = "Tomorow";
+  dueDateP.textContent = task.dueDate;
 
   // ------------ Checkbox
   const checkBoxContainer = createEle("li", "check-box-container");
   const checkbox = createEle("input", "is-done", "checkbox");
-  const checkboxLabel = createEle("label", "checkbox-label", "is-done");
+  checkbox.dataset.itemId = task.id;
+  checkbox.id = task.id;
+  checkbox.checked = task.isChecked;
+  const checkboxLabel = createEle("label", "checkbox-label", "is-done", task.id);
+
+  checkboxLabel.htmlFor = task.id;
+
   const checkboxLabelSpanOn = createEle("span", "on");
   checkboxLabelSpanOn.textContent = "ON";
   const checkboxLabelSpanOff = createEle("span", "off");
@@ -37,7 +42,7 @@ export function createTodoEle() {
   const hiddenDetailsContainer = createEle("div", "hidden-details");
   hiddenDetailsContainer.classList.add("un-expand-hidden-details");
 
-  // -------------  Fofm Hidden
+  // -------------  Form Hidden
   const form = createEle("form", "form-details");
   const fieldset = createEle("fieldset", "details-fieldset");
   const legend = createEle("legend", "details-legend");
@@ -46,11 +51,11 @@ export function createTodoEle() {
 
   // ------------ todo details label
   const todoDetails = createEle("div", "todo-details");
-  const todoTitle = createEle("label", "todo-title", "title");
+  const todoTitle = createEle("p", "todo-title");
   todoTitle.textContent = "Title";
-  const todoDueDate = createEle("label", "todo-due-date", "due-date");
+  const todoDueDate = createEle("p", "todo-due-date");
   todoDueDate.textContent = "Due-date";
-  const todoPriority = createEle("label", "todo-priority", "priority");
+  const todoPriority = createEle("p", "todo-priority");
   todoPriority.textContent = "Priority";
 
   //--------- todo details inputs
@@ -62,21 +67,41 @@ export function createTodoEle() {
   //------------- todo textarea description
   const todoInputDescription = createEle("div", "description");
 
-  const todoInputDescriptionLabel = createEle("label", "todo-input-description-label", "description");
+  const todoInputDescriptionLabel = createEle("p", "todo-input-description-label");
   todoInputDescriptionLabel.textContent = "Dsecription";
 
   const todoInputDescriptionTextarea = createEle("textarea", "todo-input-description-textarea", "textarea-description");
 
   //---------Todo Btns Detailes
   const todoBtnsDetails = createEle("div", "btns-details");
+
   const todoBtnUpdate = createEle("button", "btn-update");
   todoBtnUpdate.textContent = "Update";
   todoBtnUpdate.type = "button";
-  todoBtnUpdate.dataset.id = itemId;
+  todoBtnUpdate.dataset.id = task.id;
+  todoBtnUpdate.dataset.btnType = "update";
+
+
   const todoBtnCancel = createEle("button", "btn-cancel");
   todoBtnCancel.textContent = "Cancel";
   todoBtnCancel.type = "button";
-  todoBtnCancel.dataset.id = itemId;
+  todoBtnCancel.dataset.id = task.id;
+  todoBtnCancel.dataset.btnType = "cancel";
+
+  const todoBtnDelete = createEle("button", "btn-delete");
+  todoBtnDelete.textContent = "Delete";
+  todoBtnDelete.type = "button";
+  todoBtnDelete.dataset.id = task.id;
+  todoBtnDelete.dataset.btnType = "delete";
+
+  const todoBtnAddtoFavorite = createEle("button", "btn-favorite");
+  todoBtnAddtoFavorite.textContent = "Archive";
+  todoBtnAddtoFavorite.type = "button";
+  todoBtnAddtoFavorite.dataset.id = task.id;
+  todoBtnAddtoFavorite.dataset.btnType = "archive";
+
+
+
 
   // ---------- apend child to dom
 
@@ -86,7 +111,7 @@ export function createTodoEle() {
   checkboxLabel.append(checkboxLabelSpanOn, checkboxLabelSpanOff);
   checkBoxContainer.append(checkbox, checkboxLabel);
 
-  todoBtnsDetails.append(todoBtnUpdate, todoBtnCancel);
+  todoBtnsDetails.append(todoBtnAddtoFavorite, todoBtnUpdate, todoBtnCancel, todoBtnDelete);
   todoInputDescription.append(todoInputDescriptionLabel, todoInputDescriptionTextarea)
   todoInputs.append(todoInputTitle, todoInputDueDate, todoInputPriority);
   todoDetails.append(todoTitle, todoDueDate, todoPriority)
@@ -95,22 +120,21 @@ export function createTodoEle() {
   hiddenDetailsContainer.append(form);
 
   todoItem.append(head, mainDescripton, dueDate, checkBoxContainer, hiddenDetailsContainer);
-  console.log("Item created");
   return todoItem;
 
 }
 
-function createEle(eleType, eleClass, option = undefined) {
+function createEle(eleType, eleClass, option = undefined, checkboxEleId = undefined) {
   const ele = document.createElement(eleType);
   ele.classList.add(eleClass);
   if (eleType == "input" && option) {
     ele.type = option || "text";
     ele.name = eleClass;
-    ele.id = eleClass;
+    ele.id = checkboxEleId;
   }
-  if (eleType == "label" && option) {
-    ele.htmlFor = option;
-  }
+  // if (eleType == "label" && option) {
+  //   ele.htmlFor = option;
+  // }
   return ele;
 
 }
