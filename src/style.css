@@ -1,6 +1,6 @@
 :root {
   font-size: 16px;
-  
+
   --color-primary: #000000;
   /* --color-secondary: #2ecc71; */
   --color-header-text: white;
@@ -72,7 +72,11 @@ body {
   font-weight: 600;
   font-size: 1.4rem;
   color: var(--color-header-text);
+
+
 }
+
+
 
 .sidebar .container .my-tasks li,
 .my-projects li,
@@ -81,6 +85,10 @@ body {
   font-size: 1.2rem;
   color: var(--color-text);
   font-weight: 600;
+}
+
+.side-item:hover {
+  cursor: pointer;
 }
 
 .menu {

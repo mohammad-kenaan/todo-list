@@ -26,9 +26,8 @@ export function createTodoEle(task) {
   const checkBoxContainer = createEle("li", "check-box-container");
   const checkbox = createEle("input", "is-done", "checkbox");
   checkbox.dataset.itemId = task.id;
-  checkbox.id = task.id;
   checkbox.checked = task.isChecked;
-  const checkboxLabel = createEle("label", "checkbox-label", "is-done", task.id);
+  const checkboxLabel = createEle("label", "checkbox-label", "is-done");
 
   checkboxLabel.htmlFor = task.id;
 
@@ -78,26 +77,22 @@ export function createTodoEle(task) {
   const todoBtnUpdate = createEle("button", "btn-update");
   todoBtnUpdate.textContent = "Update";
   todoBtnUpdate.type = "button";
-  todoBtnUpdate.dataset.id = task.id;
   todoBtnUpdate.dataset.btnType = "update";
 
 
   const todoBtnCancel = createEle("button", "btn-cancel");
   todoBtnCancel.textContent = "Cancel";
   todoBtnCancel.type = "button";
-  todoBtnCancel.dataset.id = task.id;
   todoBtnCancel.dataset.btnType = "cancel";
 
   const todoBtnDelete = createEle("button", "btn-delete");
   todoBtnDelete.textContent = "Delete";
   todoBtnDelete.type = "button";
-  todoBtnDelete.dataset.id = task.id;
   todoBtnDelete.dataset.btnType = "delete";
 
   const todoBtnAddtoFavorite = createEle("button", "btn-favorite");
   todoBtnAddtoFavorite.textContent = "Archive";
   todoBtnAddtoFavorite.type = "button";
-  todoBtnAddtoFavorite.dataset.id = task.id;
   todoBtnAddtoFavorite.dataset.btnType = "archive";
 
 
@@ -124,13 +119,13 @@ export function createTodoEle(task) {
 
 }
 
-function createEle(eleType, eleClass, option = undefined, checkboxEleId = undefined) {
+function createEle(eleType, eleClass, option = undefined) {
   const ele = document.createElement(eleType);
   ele.classList.add(eleClass);
   if (eleType == "input" && option) {
     ele.type = option || "text";
     ele.name = eleClass;
-    ele.id = checkboxEleId;
+
   }
   // if (eleType == "label" && option) {
   //   ele.htmlFor = option;

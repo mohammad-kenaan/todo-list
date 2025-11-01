@@ -8,6 +8,7 @@ const projects = [];  // has Projects Objescts
 
   for (let i = 0; i < 10; i++) {
     let task = createTask(
+      i,
       "Task Title: " + i,
       "This is a description for Task Number: " + i, "Priority: " + i,
       "March / " + i,
@@ -20,8 +21,8 @@ const projects = [];  // has Projects Objescts
   
   for (let i = 0; i < 10; i++) {
     let project = createProject(
-      "Project Name: " + i,
       i,
+      "Project Name: " + i,
       tasks,
       false)
     projects.push(project);
@@ -31,5 +32,4 @@ const projects = [];  // has Projects Objescts
   localStorage.setItem("tasks", JSON.stringify(tasks));
   localStorage.setItem("projects", JSON.stringify(projects));
 
-  console.log("----------");
 

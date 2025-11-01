@@ -1,4 +1,6 @@
+import "./defaultObj.js";
 import "./inbox.js";
+import "./sideItem.js";
 import { showTasksEle, showDoneTasksEle, showSideItems, showSelecteOption } from "./itemsDisplay.js";
 
 const doneTaskListEle = document.querySelector('.list-done-tasks');
@@ -12,6 +14,6 @@ const projects = JSON.parse(localStorage.getItem("projects")) || [];  // has tas
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 
-  showSideItems(projects, projectsElement);
-  showSideItems(archiveTasks, favTasksElement);
-  showSideItems(doneTasks, doneTaskListEle);
+  showSideItems(projects, projectsElement, "project");
+  showSideItems(archiveTasks, favTasksElement, "task");
+  showSideItems(doneTasks, doneTaskListEle, "task");

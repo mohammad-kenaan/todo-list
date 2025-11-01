@@ -1,5 +1,6 @@
 // import { taskCanDo } from "./features";
 export function createTask(
+  id,
   title, 
   description, 
   priority, 
@@ -8,8 +9,9 @@ export function createTask(
   personId = 1, 
   isChecked = false) {
 
+
   const taskObj = {
-    id: window.crypto.randomUUID(),
+    id: id,
     title: title,
     description: description,
     priority: priority,

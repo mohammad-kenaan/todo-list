@@ -1,4 +1,4 @@
-import { createTodoEle } from "./todoItem.js";
+import { createTodoEle } from "./todoEle.js";
 import { createSideListEle } from "./sideListEle.js"
 
 
@@ -10,21 +10,21 @@ export function showTasksEle(tasksOfObj, HtmlEle) {
   });
 }
 
-export function showDoneTasksEle(doneTasksOfObj, HtmlEle) {
+// export function showDoneTasksEle(doneTasksOfObj, HtmlEle, type) {
 
-  doneTasksOfObj.forEach((task) => {
-    const todoEle = createSideListEle(task);
-    HtmlEle.append(todoEle);
-  });
+//   doneTasksOfObj.forEach((task) => {
+//     const todoEle = createSideListEle(task, type);
+//     HtmlEle.append(todoEle);
+//   });
 
-}
+// }
 
 
-export function showSideItems(arr, HtmlEle) {
+export function showSideItems(arr, HtmlEle, type) {
   let counter = 0;
     arr.forEach((task) => {
       if(counter === 4) return;
-    const todoEle = createSideListEle(task);
+    const todoEle = createSideListEle(task, type);
     HtmlEle.append(todoEle);
     counter++;
   });

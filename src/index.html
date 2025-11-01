@@ -20,9 +20,24 @@
           <h2 class="user-name">Morgan</h2>
         </div>
         <div class="my-projects">
+
           <button class="add-project">Add Project</button>
-          <h1>My Tasks</h1>
+
+          <h1>Dashboard</h1>
           <ul class="projects-list">
+            <li>
+              <i class="fa-solid fa-diagram-project"></i>
+              <button id="btn-inbox">Projects</button>
+            </li>
+            <li>
+              <i class="fa-solid fa-box-archive"></i>
+              <button id="btn-inbox">Archive</button>
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              <button id="btn-inbox">Done Tasks</button>
+            </li>
+
             <li>
               <i class="fa-solid fa-inbox"></i>
               <button id="btn-inbox">inbox</button>
@@ -46,7 +61,7 @@
         <div class="my-projects">
           <h1>My Projects</h1>
           <ul class="progects-list">
-           
+
           </ul>
         </div>
 
@@ -89,14 +104,14 @@
           <p> <input type="number" name="priority" id="priority"> </p>
 
 
-          
-            <select id="project-id">
-              <button>
-                <selectedcontent> </selectedcontent>
-              </button>
-              <option value="">Assign to Project</option>
-            </select>
-         
+
+          <select id="project-id">
+            <button>
+              <selectedcontent> </selectedcontent>
+            </button>
+            <option value="">Assign to Project</option>
+          </select>
+
 
           <p> <label for="due-date">Due date </label> </p>
           <!--    edit the next input  -->

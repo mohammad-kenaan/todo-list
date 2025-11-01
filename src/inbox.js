@@ -13,8 +13,8 @@ const Controller = appControllerCanDo();
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];  // has tasks Objescts
 const projects = JSON.parse(localStorage.getItem("projects")) || [];  // has tasks Objescts
 
-const archiveTasks = [];
-const doneTasks = [];
+const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
+const doneTasks = JSON.parse(localStorage.getItem("donetasks"))  || [];
 
 
 const addTask = document.querySelector('.menu-add-task');
@@ -37,65 +37,64 @@ inboxBtn.addEventListener("click", () => {
 
 function showInboxContent() {
   todoList.addEventListener('click', (e) => {
+
     const clickedTodoItem = e.target.closest('.todo-item');
-    const clickedTodoItemIndex = Controller.getElementIndex(tasks, e.target.dataset.id);
 
-    if (!clickedTodoItem) return;
+    if (!clickedTodoItem)return;
+    
+    else if (clickedTodoItem) {
 
-    else if (e.target.nodeName === "BUTTON") {
-      const btnType = e.target.dataset.btnType;
-      const btnTId = e.target.dataset.id;
+      const clickedTodoItemId = clickedTodoItem.dataset.id;
+      const clickedTodoItemIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
+     
+      if (e.target.nodeName === "BUTTON") {
+        const btnType = e.target.dataset.btnType;
 
+        switch (btnType) {
+          case "delete": {
+            Controller.deletetask(tasks, clickedTodoItemId);
+            todoList.textContent = "";
+            showTasksEle(tasks, todoList);;
+            break;
 
-      switch (btnType) {
-        case "delete": {
-          Controller.deletetask(tasks, btnTId);
-          todoList.textContent = "";
-          showTasksEle(tasks, todoList);;
-
-          break;
-
-        }
-        case "cancel": Controller.unExpandItems(); break;
-        case "update": updatetask(); break;
-        case "archive": {
-          Controller.sendItem(tasks, archiveTasks, clickedTodoItemIndex, "archive");
-
-          favTasksElement.textContent = "";
-          showSideItems(archiveTasks, favTasksElement);
-          break;
+          }
+          case "cancel": Controller.unExpandItems(); break;
+          case "update": updatetask(); break;
+          case "archive": {
+            Controller.sendItem(tasks, archiveTasks, clickedTodoItemIndex, "archive");
+            favTasksElement.textContent = "";
+            showSideItems(archiveTasks, favTasksElement, "task");
+            break;
+          }
         }
       }
-    }
 
-    else if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
+      else if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
 
-      const checkbox = e.target;
-      const checkboxId = checkbox.dataset.itemId;
+        const checkbox = e.target;
+        // taskIndex that contains clicked checkbox
 
-      // taskIndex that contains clicked checkbox
+        const taskIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
+        if (Controller.isTaskChecked(checkbox)) {
+          tasks[taskIndex].isChecked = true;
+          Controller.sendItem(tasks, doneTasks, taskIndex, "doneTasks");
+          doneTaskListEle.textContent = "";
+          showSideItems(doneTasks, doneTaskListEle, "task");
 
-      const taskIndex = Controller.getElementIndex(tasks, checkboxId);
+        } else {
 
-      if (Controller.isTaskChecked(checkbox)) {
-        tasks[taskIndex].isChecked = true;
-        Controller.sendItem(tasks, doneTasks, taskIndex, "doneTasks");
-        doneTaskListEle.textContent = "";
-        showSideItems(doneTasks, doneTaskListEle);
+          Controller.deletetask(doneTasks, clickedTodoItemId);
+          localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+          tasks[taskIndex].isChecked = false;
+          doneTaskListEle.textContent = "";
+          showSideItems(doneTasks, doneTaskListEle, "task");
+        }
 
-      } else {
-
-        Controller.deletetask(doneTasks, checkboxId);
-        localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-        tasks[taskIndex].isChecked = false;
-        doneTaskListEle.textContent = "";
-        showSideItems(doneTasks, doneTaskListEle);
       }
-
-    }
-    else {
-      Controller.unExpandItems();
-      Controller.expandItem(clickedTodoItem);
+      else {
+        Controller.unExpandItems();
+        Controller.expandItem(clickedTodoItem);
+      }
     }
   })
 

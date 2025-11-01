@@ -64,7 +64,7 @@ function addNewItemOnCancelBtnsNodeList() {
 
 
 function getElementIndex(arrayStorage, id) {
-  return arrayStorage.findIndex((ele) => ele.id === id);
+  return arrayStorage.findIndex((ele) => ele.id == id);
 
 }
 
@@ -86,13 +86,14 @@ function sendItem(from, to, index, keyName) {
 
 //-----Shared Fun-----------
 function editFun(id, arr, newObj) {
-  const index = arr.findIndex((ele) => ele.id === id);
+  const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1, newObj);
 }
 
 //-----------------
 function deletetask(arr, id) {
-  const index = arr.findIndex((ele) => ele.id === id);
+  
+  const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1);
 }
 
