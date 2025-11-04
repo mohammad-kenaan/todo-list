@@ -21,8 +21,21 @@ export function createTodoEle(task) {
   const dueDateSpan = createEle("span", "due-date-span");
   dueDateSpan.textContent = "Due date: ";
 
+
+  const format = {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  }
+  const date = new Date(task.dueDate);
+  let dateFormated = date.toLocaleString("en-CA", format)
+
   const dueDateP = createEle("p", "due-date-p");
-  dueDateP.textContent = task.dueDate;
+  dueDateP.textContent = dateFormated;
+
 
   // ------------ Checkbox
   const checkBoxContainer = createEle("li", "check-box-container");
@@ -35,7 +48,7 @@ export function createTodoEle(task) {
 
   checkboxLabel.htmlFor = checkbox.id
   console.log("task ID is:" + task.id);
-  console.log("laber for is:" + checkboxLabel.htmlFor );
+  console.log("laber for is:" + checkboxLabel.htmlFor);
 
   const checkboxLabelSpanOn = createEle("span", "on");
   checkboxLabelSpanOn.textContent = "ON";

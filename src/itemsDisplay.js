@@ -40,16 +40,3 @@ export function showSelecteOption(projects) {
     selectedOptions.append(option);
   });
 }
-
-
-function updateDomContent() {
-
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  localStorage.setItem("archive", JSON.stringify(archiveTasks));
-  localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-
-  showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
-  showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
-  showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-
-}

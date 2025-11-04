@@ -19,7 +19,7 @@ function createDefaultObjs() {
     "Task Title: Create Home Page",
     "Design and implement the main landing page with hero section, navigation bar, and call-to-action button.",
     "Priority: High",
-    "March / 11",
+    new Date().toISOString(),
     123,
     0,
     false
@@ -30,7 +30,7 @@ function createDefaultObjs() {
     "Task Title: Design Contact Page",
     "Build a responsive contact form with name, email, message fields, and form validation.",
     "Priority: Medium",
-    "March / 12",
+    new Date().toISOString(),
     123,
     0,
     false
@@ -41,7 +41,7 @@ function createDefaultObjs() {
     "Task Title: Build About Page",
     "Add company information, team section, and mission statement with proper layout and styling.",
     "Priority: Low",
-    "March / 13",
+    new Date(2025, 10, 6, 9, 0).toISOString(),
     123,
     0,
     false
@@ -52,7 +52,7 @@ function createDefaultObjs() {
     "Task Title: Add Navbar Component",
     "Develop a reusable navigation bar component with dropdown support and active link highlighting.",
     "Priority: High",
-    "March / 14",
+    new Date(2025, 11, 15, 9, 0).toISOString(),
     123,
     0,
     false
@@ -63,7 +63,7 @@ function createDefaultObjs() {
     "Task Title: Implement Footer Section",
     "Create a footer with social media links, contact info, and copyright text, consistent across all pages.",
     "Priority: Medium",
-    "March / 15",
+    new Date(2025, 10, 10, 9, 0).toISOString(),
     123,
     0,
     false
@@ -75,7 +75,7 @@ function createDefaultObjs() {
     "Task Title: Setup Network Topology",
     "Design and configure the physical and logical topology for the office LAN including switches, routers, and cabling.",
     "Priority: High",
-    "April / 01",
+    new Date(2025, 10, 7, 9, 0).toISOString(),
     456,
     0,
     false
@@ -86,7 +86,7 @@ function createDefaultObjs() {
     "Task Title: Configure VLANs",
     "Create and assign VLANs on managed switches to segment network traffic based on department or function.",
     "Priority: High",
-    "April / 02",
+    new Date(2025, 10, 12, 9, 0).toISOString(),
     456,
     0,
     false
@@ -97,7 +97,7 @@ function createDefaultObjs() {
     "Task Title: Setup DHCP and DNS Services",
     "Install and configure DHCP and DNS servers to automate IP management and name resolution within the network.",
     "Priority: Medium",
-    "April / 03",
+    new Date(2025, 10, 13, 9, 0).toISOString(),
     456,
     0,
     false
@@ -108,7 +108,7 @@ function createDefaultObjs() {
     "Task Title: Implement Firewall Rules",
     "Define and apply firewall rules to control inbound and outbound traffic, ensuring security and compliance.",
     "Priority: High",
-    "April / 04",
+    new Date(2025, 10, 6, 9, 0).toISOString(),
     456,
     0,
     false
@@ -119,7 +119,7 @@ function createDefaultObjs() {
     "Task Title: Perform Network Testing",
     "Verify connectivity, measure latency, and ensure that all devices communicate properly across the network segments.",
     "Priority: Medium",
-    "April / 05",
+    new Date(2025, 10, 11, 9, 0).toISOString(),
     456,
     0,
     true
@@ -130,7 +130,7 @@ function createDefaultObjs() {
     "Task Title: Design System Architecture",
     "Define the overall system architecture including modules, data flow, and integration points using UML diagrams.",
     "Priority: High",
-    "May / 01",
+    new Date(2025, 10, 8, 9, 0).toISOString(),
     789,
     0,
     false
@@ -141,7 +141,7 @@ function createDefaultObjs() {
     "Task Title: Implement Authentication Module",
     "Develop a secure user authentication and authorization module with password hashing and session management.",
     "Priority: High",
-    "May / 02",
+
     789,
     0,
     false
@@ -152,7 +152,7 @@ function createDefaultObjs() {
     "Task Title: Write Unit Tests",
     "Create unit tests for core functionalities to ensure code reliability and maintainability using a testing framework.",
     "Priority: Medium",
-    "May / 03",
+    new Date(2025, 10, 9, 9, 0).toISOString(),
     789,
     0,
     false
