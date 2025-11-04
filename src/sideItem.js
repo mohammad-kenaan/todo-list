@@ -70,12 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
          Controller.expandItem(todoEle);
          todoListEle.append(todoEle);
       }
-
     }
   });
-
-
-
 
 })
 

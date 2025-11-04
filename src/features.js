@@ -17,15 +17,36 @@ export function appControllerCanDo() {
     unExpandItem,
     unExpandItems,
     addNewItemOnCancelBtnsNodeList,
+    sendItem,
+
     getElementIndex,
     isTaskChecked,
-    sendItem,
-    deletetask,
-    getProjectTasks,
     filterDoneTasks,
+    deletetask,
+
+    getProjectTasks,
 
   }
 }
+
+export function taskCanDo() {
+  return {
+    getElementIndex,
+    isTaskChecked,
+    filterDoneTasks,
+    deletetask
+  }
+}
+
+export function projectCanDo() {
+  return {
+    getProjectTasks,
+  }
+}
+
+
+
+
 
 function expandItem(itemClicked) {
   itemClicked.classList.add('expand');
@@ -97,7 +118,7 @@ function deletetask(arr, id) {
 
   const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1);
-  arr.forEach(ele => console.log(ele));
+
 }
 
 //----------------

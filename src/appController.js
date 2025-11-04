@@ -1,4 +1,6 @@
 import "./defaultObj.js";
+import "./dialogForm.js";
+import "./dialogFromProject.js";
 import "./inbox.js";
 import "./myProjects.js"
 import "./sideItem.js";
@@ -53,7 +55,7 @@ inboxBtn.addEventListener("click", () => {
 myProjectBtn.addEventListener("click", () => {
   pageTitle.textContent = "My Projects";
   todoList.textContent = "";
-  showProjectsEle(projects, todoList);
+  showProjectsEle(JSON.parse(localStorage.getItem("projects")), todoList);
 })
 
 
@@ -93,6 +95,6 @@ upcoming.addEventListener("click", () => {
 
   todoList.textContent = "";
 
- showTasksEle(getUpcomingTasks(tasks), todoList)
+ showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
 
 })

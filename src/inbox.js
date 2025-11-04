@@ -1,5 +1,5 @@
 
-import "./dialogForm.js";
+
 
 
 import { showTasksEle, showDoneTasksEle, showSideItems, showSelecteOption } from "./itemsDisplay.js";
@@ -44,16 +44,17 @@ todoList.addEventListener('click', (e) => {
           case "delete": {
             Controller.deletetask(tasks, clickedTodoItemId);
             todoList.textContent = "";
-            updateDomContent()
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
             break;
 
           }
           case "cancel": Controller.unExpandItems(); break;
-          case "update": updatetask(); break;
+          // case "update": updatetask(); break;
           case "archive": {
             Controller.sendItem(tasks, archiveTasks, clickedTodoItemIndex, "archive");
             favTasksElement.textContent = "";
-            
+
             showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
             showTasksEle(JSON.parse(localStorage.getItem("archive")), todoList)
             Controller.unExpandItems();
@@ -69,8 +70,8 @@ todoList.addEventListener('click', (e) => {
         // taskIndex that contains clicked checkbox
         const taskIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
 
-        if (Controller.isTaskChecked(checkbox)) {                                
-        
+        if (Controller.isTaskChecked(checkbox)) {
+
           tasks[taskIndex].isChecked = true;
           Controller.sendItem(tasks, doneTasks, taskIndex, "doneTasks");
 

@@ -1,18 +1,19 @@
 // import { taskCanDo } from "./features";
 export function createTask(
-  id,
+
   title,
   description,
   priority,
   dueDate,
-  projectId = 1,
+  projectId = 100,
   personId = 1,
   isChecked,
-  ) {
+  id = Math.floor(Date.now() / 1000),
+) {
 
 
   const taskObj = {
-    id: id,
+
     title: title,
     description: description,
     priority: priority,
@@ -21,6 +22,7 @@ export function createTask(
     personId: personId,
     isChecked: isChecked,
     type: "task",
+    id: id,
   }
   return {
     ...taskObj,

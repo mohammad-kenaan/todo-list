@@ -47,8 +47,7 @@ export function createTodoEle(task) {
   const checkboxLabel = createEle("label", "checkbox-label", "is-done");
 
   checkboxLabel.htmlFor = checkbox.id
-  console.log("task ID is:" + task.id);
-  console.log("laber for is:" + checkboxLabel.htmlFor);
+
 
   const checkboxLabelSpanOn = createEle("span", "on");
   checkboxLabelSpanOn.textContent = "ON";

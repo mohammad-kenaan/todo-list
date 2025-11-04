@@ -447,7 +447,7 @@ dialog form .dialog-card-content {
 
   }
 
-  #textarea {
+  #textarea,  #textarea-project {
     padding: 5px;
     flex-grow: 1;
 
@@ -474,7 +474,7 @@ dialog form .dialog-card-info {
     font-weight: 600;
   }
 
-  #cancel {
+  #cancel, #cancel-project {
     background-color: #c52d07;
     margin: 30px;
   }

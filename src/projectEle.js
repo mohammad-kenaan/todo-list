@@ -32,8 +32,6 @@ export function createProjectEle(project) {
   const checkboxLabelSpanOff = createEle("span", "off");
   checkboxLabelSpanOff.textContent = "OFF";
 
-
-
   //---------Todo Btns Detailes
   const todoBtnsDetails = createEle("div", "btns-details");
 
@@ -42,16 +40,12 @@ export function createProjectEle(project) {
   todoBtnCancel.type = "button";
   todoBtnCancel.dataset.btnType = "update";
 
-
-
   const todoBtnDelete = createEle("button", "btn-delete");
   todoBtnDelete.textContent = "Delete";
   todoBtnDelete.type = "button";
   todoBtnDelete.dataset.btnType = "delete";
 
-
   //----------- Tasks List
-
   const projectTasksList = createEle("div", "project-tasks-list");
   const table = document.createElement("table");
   table.style.textAlign = "center";
@@ -60,15 +54,12 @@ export function createProjectEle(project) {
   table.style.marginTop = "30px";
   table.style.fontSize = "16px";
 
-
   const headerRow = document.createElement("tr");
   headerRow.style.backgroundColor = "gray";
   headerRow.style.color = "white";
   headerRow.style.padding = "200px";
 
-
   table.appendChild(headerRow);
-
 
   const thId = document.createElement("th");
   thId.textContent = "Task ID";
@@ -77,7 +68,6 @@ export function createProjectEle(project) {
   const thName = document.createElement("th");
   thName.textContent = "Task Name";
   thName.style.padding = "15px";
-
 
   headerRow.append(thId, thName);
 
@@ -95,20 +85,13 @@ export function createProjectEle(project) {
     const row = document.createElement("tr");
     row.style.borderBottom = "3px solid gray";
 
-
-
-
-
     row.append(tdId, tdName);
 
     table.appendChild(row);
 
   });
 
-
-
   projectTasksList.appendChild(table);
-
 
   // ---------- apend child to dom
 
@@ -131,9 +114,7 @@ function createEle(eleType, eleClass, option = undefined) {
   if (eleType == "input" && option) {
     ele.type = option || "text";
     ele.name = eleClass;
-
   }
-
   return ele;
 
 }

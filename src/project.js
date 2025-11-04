@@ -1,11 +1,12 @@
 
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];  // has tasks Objescts
 
-export function createProject(id, name,description,  tasksList, isChecked = false) {
+export function createProject(id, name,description,  tasksListId = 100, isChecked = false) {
   const projectObj = {
     name: name,
     id: id,
     description: description,
-    tasksList: tasksList,
+    tasksList: filterTasks(tasksListId),
     isChecked: isChecked,
     type: "project",
   }
@@ -14,3 +15,7 @@ export function createProject(id, name,description,  tasksList, isChecked = fals
   }
 }
 
+  function filterTasks(id) {
+    return tasks.filter(task => task.projectId == id);
+
+  }
