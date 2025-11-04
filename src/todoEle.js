@@ -4,6 +4,8 @@ export function createTodoEle(task) {
 
   const todoItem = createEle("div", "todo-item");
   todoItem.dataset.id = task.id;
+  todoItem.dataset.eleType = "task";
+
   // ----------- Head
   const head = createEle("h1", "head");
   head.textContent = task.title;
@@ -26,10 +28,14 @@ export function createTodoEle(task) {
   const checkBoxContainer = createEle("li", "check-box-container");
   const checkbox = createEle("input", "is-done", "checkbox");
   checkbox.dataset.itemId = task.id;
+  checkbox.id = task.id + "label";
   checkbox.checked = task.isChecked;
+  // console.log("checbox is checked" + task.isChecked);
   const checkboxLabel = createEle("label", "checkbox-label", "is-done");
 
-  checkboxLabel.htmlFor = task.id;
+  checkboxLabel.htmlFor = checkbox.id
+  console.log("task ID is:" + task.id);
+  console.log("laber for is:" + checkboxLabel.htmlFor );
 
   const checkboxLabelSpanOn = createEle("span", "on");
   checkboxLabelSpanOn.textContent = "ON";
@@ -127,9 +133,7 @@ function createEle(eleType, eleClass, option = undefined) {
     ele.name = eleClass;
 
   }
-  // if (eleType == "label" && option) {
-  //   ele.htmlFor = option;
-  // }
+
   return ele;
 
 }

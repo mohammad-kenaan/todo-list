@@ -21,6 +21,8 @@ export function appControllerCanDo() {
     isTaskChecked,
     sendItem,
     deletetask,
+    getProjectTasks,
+    filterDoneTasks,
 
   }
 }
@@ -92,9 +94,31 @@ function editFun(id, arr, newObj) {
 
 //-----------------
 function deletetask(arr, id) {
-  
+
   const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1);
+  arr.forEach(ele => console.log(ele));
+}
+
+//----------------
+function getProjectTasks(arr, id) {
+  return arr.filter(task => task.projectId == id);
+
 }
 
 //-----DOM-----]
+
+
+
+function filterDoneTasks(tasks) {
+  const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
+
+  tasks.forEach(task => {
+    if (isTaskChecked(task)) {
+      console.log("added it");
+      doneTasks.push(task);
+    }
+  });
+
+  localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+}

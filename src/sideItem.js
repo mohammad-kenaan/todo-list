@@ -1,5 +1,6 @@
 import { appControllerCanDo } from "./features.js";
 import { createTodoEle } from "./todoEle.js";
+import { createProjectEle } from "./projectEle.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -8,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const sideItemsProject = document.querySelectorAll(".side-item-project");
 
   const todoListEle = document.querySelector(".todo-list");
+  const doneTasksEleContainer = document.querySelector(".done-tasks");
+  const archiveTasksEleContainer = document.querySelector(".fav-tasks-container");
 
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -23,32 +26,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  sideItemstask.forEach(item => {
-    item.addEventListener("click", (e) => {
+  sideItemsProject.forEach(projectEle => {
+    projectEle.addEventListener("click", (e) => {
+      todoListEle.textContent = "";
+      const projectElement = e.target;
+      const projectElementId = projectElement.dataset.parentId;
+
+      const clickerProjectIndex = Controller.getElementIndex(projects, projectElementId);
+
+      if (projects[clickerProjectIndex]) {
+        todoListEle.append(createProjectEle(projects[clickerProjectIndex]));
+      }
+    })
+  })
+
+  doneTasksEleContainer.addEventListener("click", (e) => {
+    if (e.target.nodeName === "SPAN") {
       const element = e.target;
       const elementId = element.dataset.parentId;
-
-      if (e.target.nodeName === "SPAN") {
-        todoListEle.textContent = "";
-        let itemIndexInTasks = Controller.getElementIndex(tasks, elementId)
-
-        if (itemIndexInTasks === -1)
-          console.log("Item Not founded");
-        else {
-          console.log(tasks[itemIndexInTasks]);
-          const todoEle = createTodoEle(tasks[itemIndexInTasks]);
-          Controller.expandItem(todoEle);
-          todoListEle.append(todoEle);
-        }
+      todoListEle.textContent = "";
+      let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
+      if (itemIndexInTasks === -1)  console.log("Item Not founded");
+      else {
+         const todoEle = createTodoEle(tasks[itemIndexInTasks]);
+         Controller.expandItem(todoEle);
+         todoListEle.append(todoEle);
       }
-    });
-  })
+
+    }
+  });
+
+
+  archiveTasksEleContainer.addEventListener("click", (e) => {
+    if (e.target.nodeName === "SPAN") {
+      const element = e.target;
+      console.log(element);
+      const elementId = element.dataset.parentId;
+      todoListEle.textContent = "";
+      let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
+      if (itemIndexInTasks === -1)  console.log("Item Not founded");
+      else {
+         const todoEle = createTodoEle(tasks[itemIndexInTasks]);
+         Controller.expandItem(todoEle);
+         todoListEle.append(todoEle);
+      }
+
+    }
+  });
+
+
+
+
 })
 
 
-// 
 
-// console.log("-------------");
-// console.log("Ele in Tasks is is: " + tasks[itemIndex]); //undefined
-// console.log("ItemIndex is: " +itemIndex);
-// 
+

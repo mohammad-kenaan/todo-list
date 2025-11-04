@@ -5,8 +5,6 @@ import "./dialogForm.js";
 import { showTasksEle, showDoneTasksEle, showSideItems, showSelecteOption } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 
-const pageTitle = document.querySelector(".page-title");
-const inboxBtn = document.querySelector("#btn-inbox");
 const Controller = appControllerCanDo();
 
 
@@ -14,7 +12,7 @@ const tasks = JSON.parse(localStorage.getItem("tasks")) || [];  // has tasks Obj
 const projects = JSON.parse(localStorage.getItem("projects")) || [];  // has tasks Objescts
 
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
-const doneTasks = JSON.parse(localStorage.getItem("donetasks"))  || [];
+const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 
 
 const addTask = document.querySelector('.menu-add-task');
@@ -26,27 +24,19 @@ const projectsElement = document.querySelector('.progects-list');
 
 //---------------------------------------------
 
+todoList.addEventListener('click', (e) => {
 
-inboxBtn.addEventListener("click", () => {
-  pageTitle.textContent = "Inbox";
-  todoList.textContent = "";
-  showTasksEle(tasks, todoList)
-  showInboxContent();
-})
+  const clickedTodoItem = e.target.closest('.todo-item');
 
+  if (clickedTodoItem.dataset.eleType == "task") {
 
-function showInboxContent() {
-  todoList.addEventListener('click', (e) => {
+    if (!clickedTodoItem) return;
 
-    const clickedTodoItem = e.target.closest('.todo-item');
-
-    if (!clickedTodoItem)return;
-    
     else if (clickedTodoItem) {
 
       const clickedTodoItemId = clickedTodoItem.dataset.id;
       const clickedTodoItemIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
-     
+
       if (e.target.nodeName === "BUTTON") {
         const btnType = e.target.dataset.btnType;
 
@@ -54,7 +44,7 @@ function showInboxContent() {
           case "delete": {
             Controller.deletetask(tasks, clickedTodoItemId);
             todoList.textContent = "";
-            showTasksEle(tasks, todoList);;
+            updateDomContent()
             break;
 
           }
@@ -63,7 +53,10 @@ function showInboxContent() {
           case "archive": {
             Controller.sendItem(tasks, archiveTasks, clickedTodoItemIndex, "archive");
             favTasksElement.textContent = "";
-            showSideItems(archiveTasks, favTasksElement, "task");
+            
+            showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
+            showTasksEle(JSON.parse(localStorage.getItem("archive")), todoList)
+            Controller.unExpandItems();
             break;
           }
         }
@@ -72,22 +65,36 @@ function showInboxContent() {
       else if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
 
         const checkbox = e.target;
-        // taskIndex that contains clicked checkbox
 
+        // taskIndex that contains clicked checkbox
         const taskIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
-        if (Controller.isTaskChecked(checkbox)) {
+
+        if (Controller.isTaskChecked(checkbox)) {                                
+        
           tasks[taskIndex].isChecked = true;
           Controller.sendItem(tasks, doneTasks, taskIndex, "doneTasks");
+
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+
           doneTaskListEle.textContent = "";
-          showSideItems(doneTasks, doneTaskListEle, "task");
+
+          showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
+
 
         } else {
 
           Controller.deletetask(doneTasks, clickedTodoItemId);
-          localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
           tasks[taskIndex].isChecked = false;
+
+
+          localStorage.setItem("tasks", JSON.stringify(tasks));
+          localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+
           doneTaskListEle.textContent = "";
-          showSideItems(doneTasks, doneTaskListEle, "task");
+
+          showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
+
         }
 
       }
@@ -96,13 +103,10 @@ function showInboxContent() {
         Controller.expandItem(clickedTodoItem);
       }
     }
-  })
-
-  //--------Test
-  //----- create some tasks
+  }
+})
 
 
-}
 
 
 

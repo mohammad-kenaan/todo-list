@@ -17,7 +17,7 @@ body {
 
 .body-container {
   display: flex;
-  gap: 50px;
+  gap: 5px;
   height: 100%;
 }
 
@@ -76,8 +76,6 @@ body {
 
 }
 
-
-
 .sidebar .container .my-tasks li,
 .my-projects li,
 .done-tasks li {
@@ -85,10 +83,16 @@ body {
   font-size: 1.2rem;
   color: var(--color-text);
   font-weight: 600;
+
+  span {
+    padding: 15px;
+  }
 }
+
 
 .side-item:hover {
   cursor: pointer;
+  color: var(--color-button-red);
 }
 
 .menu {
@@ -129,6 +133,7 @@ body {
   padding: 1rem;
   border-radius: 15px;
   cursor: pointer;
+  
 
 
   h1 {
@@ -160,7 +165,7 @@ body {
     border: 1px solid var(--color-border-card);
     padding: 20px;
     display: flex;
-    gap: 100px;
+    gap: 30px;
 
     legend {
       padding: 20px;
@@ -183,47 +188,50 @@ body {
 
 
   }
+}
 
-  .btns-details {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 20px;
+.btns-details {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 20px;
 
-    button {
-      font-size: 1.2rem;
-      padding: 0.6em 2em;
-      border-radius: 10px;
-      font-weight: 500;
-
-    }
-
-    .btn-update {
-      background-color: var(--color-button-update);
-    }
-
-    .btn-cancel {
-      background-color: rgb(82, 82, 147);
-      color: var(--color-btn-text);
-    }
-
-    .btn-delete {
-      background-color: var(--color-button-red);
-      color: var(--color-btn-text);
-    }
-
-    .btn-favorite {
-      background-color: var(--color-primary);
-      color: var(--color-btn-text);
-    }
-
+  button {
+    font-size: 1.2rem;
+    padding: 0.6em 2em;
+    border-radius: 10px;
+    font-weight: 500;
 
   }
 
+  .btn-update {
+    background-color: var(--color-button-update);
+  }
+
+  .btn-cancel {
+    background-color: rgb(82, 82, 147);
+    color: var(--color-btn-text);
+  }
+
+  .btn-delete {
+    background-color: var(--color-button-red);
+    color: var(--color-btn-text);
+  }
+
+  .btn-favorite {
+    background-color: var(--color-primary);
+    color: var(--color-btn-text);
+  }
+
+
+}
+
+table td:hover {
+  color: var(--color-button-red);
 }
 
 .expand {
-  height: 500px;
+  
   background: rgb(237, 237, 237);
   border: 1px solid red;
   transition: all 2.4s;
@@ -236,8 +244,6 @@ body {
 .un-expand-hidden-details {
   display: none;
 }
-
-
 
 
 
