@@ -1,5 +1,4 @@
 import { createTask } from "./task.js";
-import { createProject } from "./project.js";
 import { showSelecteOption } from "./itemsDisplay.js";
 
 

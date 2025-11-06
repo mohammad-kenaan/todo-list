@@ -1,7 +1,9 @@
 
+
+
 const tasks = JSON.parse(localStorage.getItem("tasks")) || [];  // has tasks Objescts
 
-export function createProject(id, name,description,  tasksListId = 100, isChecked = false) {
+export function createProject(id, name, description, tasksListId = 100, isChecked = false) {
   const projectObj = {
     name: name,
     id: id,
@@ -11,11 +13,19 @@ export function createProject(id, name,description,  tasksListId = 100, isChecke
     type: "project",
   }
   return {
-    ...projectObj
+    ...projectObj, 
+    ...projectCanDo(),
   }
 }
 
-  function filterTasks(id) {
-    return tasks.filter(task => task.projectId == id);
-
+function projectCanDo() {
+  return {
+    filterTasks,
   }
+}
+
+
+function filterTasks(id) {
+  return tasks.filter(task => task.projectId == id);
+}
+

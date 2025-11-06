@@ -1,20 +1,20 @@
 import { createTask } from './task.js'
 import { createProject } from './project.js'
 
-
-
-if (JSON.parse(localStorage.getItem("projects")) == undefined || JSON.parse(localStorage.getItem("archive")) == undefined || JSON.parse(localStorage.getItem("doneTasks")) == undefined || JSON.parse(localStorage.getItem("tasks")) == undefined) {
+if (JSON.parse(localStorage.getItem("projects")) == undefined ||
+  JSON.parse(localStorage.getItem("archive")) == undefined ||
+  JSON.parse(localStorage.getItem("doneTasks")) == undefined ||
+  JSON.parse(localStorage.getItem("tasks")) == undefined) {
   createDefaultObjs();
 }
 
+//createDefaultObjs();
+
 function createDefaultObjs() {
-
-
   const tasks = [];  // has tasks Objescts
   const projects = [];  // has Projects Objescts
 
   let task1 = createTask(
-
     "Task Title: Create Home Page",
     "Design and implement the main landing page with hero section, navigation bar, and call-to-action button.",
     "Priority: High",
@@ -25,8 +25,8 @@ function createDefaultObjs() {
     111,
   );
 
-  let task2 = createTask(
 
+  let task2 = createTask(
     "Task Title: Design Contact Page",
     "Build a responsive contact form with name, email, message fields, and form validation.",
     "Priority: Medium",
@@ -38,7 +38,6 @@ function createDefaultObjs() {
   );
 
   let task3 = createTask(
-
     "Task Title: Build About Page",
     "Add company information, team section, and mission statement with proper layout and styling.",
     "Priority: Low",
@@ -50,7 +49,6 @@ function createDefaultObjs() {
   );
 
   let task4 = createTask(
-
     "Task Title: Add Navbar Component",
     "Develop a reusable navigation bar component with dropdown support and active link highlighting.",
     "Priority: High",
@@ -62,7 +60,6 @@ function createDefaultObjs() {
   );
 
   let task5 = createTask(
-
     "Task Title: Implement Footer Section",
     "Create a footer with social media links, contact info, and copyright text, consistent across all pages.",
     "Priority: Medium",
@@ -73,9 +70,7 @@ function createDefaultObjs() {
     115,
   );
 
-
   let task6 = createTask(
-
     "Task Title: Setup Network Topology",
     "Design and configure the physical and logical topology for the office LAN including switches, routers, and cabling.",
     "Priority: High",
@@ -87,7 +82,6 @@ function createDefaultObjs() {
   );
 
   let task7 = createTask(
-
     "Task Title: Configure VLANs",
     "Create and assign VLANs on managed switches to segment network traffic based on department or function.",
     "Priority: High",
@@ -107,11 +101,9 @@ function createDefaultObjs() {
     0,
     false,
     203,
-
   );
 
   let task9 = createTask(
-
     "Task Title: Implement Firewall Rules",
     "Define and apply firewall rules to control inbound and outbound traffic, ensuring security and compliance.",
     "Priority: High",
@@ -123,7 +115,6 @@ function createDefaultObjs() {
   );
 
   let task10 = createTask(
-
     "Task Title: Perform Network Testing",
     "Verify connectivity, measure latency, and ensure that all devices communicate properly across the network segments.",
     "Priority: Medium",
@@ -135,7 +126,6 @@ function createDefaultObjs() {
   );
 
   let task11 = createTask(
-
     "Task Title: Design System Architecture",
     "Define the overall system architecture including modules, data flow, and integration points using UML diagrams.",
     "Priority: High",
@@ -147,7 +137,6 @@ function createDefaultObjs() {
   );
 
   let task12 = createTask(
-
     "Task Title: Implement Authentication Module",
     "Develop a secure user authentication and authorization module with password hashing and session management.",
     "Priority: High",
@@ -189,10 +178,6 @@ function createDefaultObjs() {
 
   //--------------- 
 
-
-
-
-
   const project1 = createProject(
     123,
     "Web Development",
@@ -223,14 +208,11 @@ function createDefaultObjs() {
 
   projects.push(project1, project2, project3, general);
 
-
   const doneTasks = [task10];
   const archive = [task12];
   localStorage.setItem("tasks", JSON.stringify(tasks));
   localStorage.setItem("projects", JSON.stringify(projects));
   localStorage.setItem("archive", JSON.stringify(archive));
   localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-
-
 }
 

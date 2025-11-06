@@ -21,7 +21,6 @@ export function createTodoEle(task) {
   const dueDateSpan = createEle("span", "due-date-span");
   dueDateSpan.textContent = "Due date: ";
 
-
   const format = {
     year: "numeric",
     month: "long",
@@ -36,7 +35,6 @@ export function createTodoEle(task) {
   const dueDateP = createEle("p", "due-date-p");
   dueDateP.textContent = dateFormated;
 
-
   // ------------ Checkbox
   const checkBoxContainer = createEle("li", "check-box-container");
   const checkbox = createEle("input", "is-done", "checkbox");
@@ -45,9 +43,7 @@ export function createTodoEle(task) {
   checkbox.checked = task.isChecked;
   // console.log("checbox is checked" + task.isChecked);
   const checkboxLabel = createEle("label", "checkbox-label", "is-done");
-
   checkboxLabel.htmlFor = checkbox.id
-
 
   const checkboxLabelSpanOn = createEle("span", "on");
   checkboxLabelSpanOn.textContent = "ON";
@@ -78,8 +74,12 @@ export function createTodoEle(task) {
   //--------- todo details inputs
   const todoInputs = createEle("div", "todo-inputs");
   const todoInputTitle = createEle("input", "todo-input-title");
-  const todoInputDueDate = createEle("input", "todo-input-due-date");
+  const todoInputDueDate = createEle("input", "todo-input-due-date", "date");
   const todoInputPriority = createEle("input", "todo-input-priority");
+
+  todoInputTitle.id = "title-inp-id"+ task.id;
+  todoInputDueDate.id = "due-date-inp-id"+ task.id;
+  todoInputPriority.id = "priority-inp-id"+ task.id;
 
   //------------- todo textarea description
   const todoInputDescription = createEle("div", "description");
@@ -88,6 +88,7 @@ export function createTodoEle(task) {
   todoInputDescriptionLabel.textContent = "Dsecription";
 
   const todoInputDescriptionTextarea = createEle("textarea", "todo-input-description-textarea", "textarea-description");
+  todoInputDescriptionTextarea.id = "todo-inp-textarea"+ task.id;
 
   //---------Todo Btns Detailes
   const todoBtnsDetails = createEle("div", "btns-details");
@@ -113,9 +114,6 @@ export function createTodoEle(task) {
   todoBtnAddtoFavorite.type = "button";
   todoBtnAddtoFavorite.dataset.btnType = "archive";
 
-
-
-
   // ---------- apend child to dom
 
   mainDescripton.append(mainDescriptonSpan, mainDescriptonP);
@@ -134,7 +132,6 @@ export function createTodoEle(task) {
 
   todoItem.append(head, mainDescripton, dueDate, checkBoxContainer, hiddenDetailsContainer);
   return todoItem;
-
 }
 
 function createEle(eleType, eleClass, option = undefined) {
@@ -143,9 +140,6 @@ function createEle(eleType, eleClass, option = undefined) {
   if (eleType == "input" && option) {
     ele.type = option || "text";
     ele.name = eleClass;
-
   }
-
   return ele;
-
 }

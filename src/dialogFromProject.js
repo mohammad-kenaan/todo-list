@@ -1,5 +1,6 @@
 
 import {createProject} from "./project.js";
+import { showSideItems } from "./itemsDisplay.js";
 
 
 const openDialog = document.querySelector('.add-project');
@@ -7,6 +8,8 @@ const dialogElem = document.getElementById("dialog-project");
 const formSubmit = document.querySelector("#confirm-project");
 const cancelProcess = document.querySelector("#cancel-project");
 const form = document.getElementById('my-form-project');
+const projectsElement = document.querySelector('.progects-list');
+
 
 
 let projects = JSON.parse(localStorage.getItem("projects"));
@@ -40,8 +43,10 @@ console.log("description is:" + description);
       description,
       );
 
-  projects.push(project);
+  projects.unshift(project);
   localStorage.setItem("projects", JSON.stringify(projects))
+  showSideItems(projects, projectsElement, "project");
+
 
   dialogElem.close();
 })

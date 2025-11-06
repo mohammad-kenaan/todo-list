@@ -1,15 +1,3 @@
-
-
-
-function assign(taskID, personId, projectId) {
-  const obj = {
-    taskID: taskID,
-    personId: personId,
-    projectId: projectId
-  }
-  storageE.push(obj);
-}
-
 //------task Fun---------
 export function appControllerCanDo() {
   return {
@@ -18,33 +6,10 @@ export function appControllerCanDo() {
     unExpandItems,
     addNewItemOnCancelBtnsNodeList,
     sendItem,
-
     getElementIndex,
-    isTaskChecked,
     filterDoneTasks,
-    deletetask,
-
-    getProjectTasks,
-
   }
 }
-
-export function taskCanDo() {
-  return {
-    getElementIndex,
-    isTaskChecked,
-    filterDoneTasks,
-    deletetask
-  }
-}
-
-export function projectCanDo() {
-  return {
-    getProjectTasks,
-  }
-}
-
-
 
 
 
@@ -64,7 +29,6 @@ function unExpandItem(todoItem) {
 
 function unExpandItems() {
   const todoItems = document.querySelectorAll('.todo-item');
-
   todoItems.forEach((todoItem) => {
     unExpandItem(todoItem);
   })
@@ -74,27 +38,14 @@ function addNewItemOnCancelBtnsNodeList() {
   const btnsCancel = document.querySelectorAll(".btn-cancel");
   console.log("we have Btns cancel: " + btnsCancel.length);
   console.log(btnsCancel);
-
   btnsCancel.forEach((btnCancel) => {
     console.log(btnCancel.dataset.id);
     btnCancel.addEventListener("click", () => {
       console.log("cancel btn clicked");
       unExpandItems();
-
     })
   })
 }
-
-
-function getElementIndex(arrayStorage, id) {
-  return arrayStorage.findIndex((ele) => ele.id == id);
-
-}
-
-function isTaskChecked(task) {
-  return task.checked;
-}
-
 
 function sendItem(from, to, index, keyName) {
   if (from[index]) {
@@ -102,44 +53,32 @@ function sendItem(from, to, index, keyName) {
       console.log("we have ");
       return;
     }
-    to.push(from[index]);
+    to.unshift(from[index]);
     localStorage.setItem(keyName, JSON.stringify(to));
   }
 }
 
-//-----Shared Fun-----------
+function getElementIndex(arrayStorage, id) {
+  return arrayStorage.findIndex((ele) => ele.id == id);
+}
+
+function filterDoneTasks(tasks) {
+  const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
+  tasks.forEach(task => {
+    if (task.isTaskChecked(task)) {
+      doneTasks.unshift(task);
+    }
+  });
+  localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+}
+
 function editFun(id, arr, newObj) {
   const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1, newObj);
 }
 
-//-----------------
-function deletetask(arr, id) {
-
-  const index = arr.findIndex((ele) => ele.id == id);
-  arr.splice(index, 1);
-
-}
-
-//----------------
-function getProjectTasks(arr, id) {
-  return arr.filter(task => task.projectId == id);
-
-}
-
-//-----DOM-----]
 
 
 
-function filterDoneTasks(tasks) {
-  const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 
-  tasks.forEach(task => {
-    if (isTaskChecked(task)) {
-      console.log("added it");
-      doneTasks.push(task);
-    }
-  });
 
-  localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-}
