@@ -15,7 +15,7 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
   task.personId,
   task.isChecked,
   task.id
-)) || []; 
+)) || [];
 
 
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
@@ -51,14 +51,13 @@ todoList.addEventListener('click', (e) => {
           }
           case "cancel": Controller.unExpandItems(); break;
 
-          // titleInp   dueDateInp   PriorityIpu    descriptionInp
-
           case "update": {
+            const expandedTask = clickedTodoItem;
 
-            const titleInp = document.querySelector(".todo-input-title").value;
-            const dueDateInp = document.querySelector(".todo-input-due-date").value;
-            const priorityInp = document.querySelector(".todo-input-priority").value;
-            const descriptionInp = document.querySelector(".todo-input-description-textarea").value;
+            const titleInp = expandedTask.querySelector(".todo-input-title").value;
+            const dueDateInp = expandedTask.querySelector(".todo-input-due-date").value;
+            const priorityInp = expandedTask.querySelector(".todo-input-priority").value;
+            const descriptionInp = expandedTask.querySelector(".todo-input-description-textarea").value;
 
             tasks[clickedTodoItemIndex].updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp);
             Controller.unExpandItems();
@@ -66,7 +65,6 @@ todoList.addEventListener('click', (e) => {
             localStorage.setItem("tasks", JSON.stringify(tasks));
             todoList.textContent = "";
             showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-
             break;
 
           }
