@@ -9,6 +9,7 @@ import { appControllerCanDo } from "./features.js";
 import { getTodayTasks } from "./today.js";
 import { getUpcomingTasks } from "./upcomingTasks.js";
 import { createTask } from "./task.js";
+import { createProject } from "./project.js";
 
 
 const Controller = appControllerCanDo();
@@ -26,8 +27,12 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
   task.isChecked,
   task.id
 )) || [];
+const projects = JSON.parse(localStorage.getItem("projects")).map(project => createProject(
+  project.id,
+  project.name,
+  project.description,
+)) || [];
 
-const projects = JSON.parse(localStorage.getItem("projects")) || [];
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 const btnToday = document.querySelector("#btn-today");
@@ -61,8 +66,10 @@ inboxBtn.addEventListener("click", () => {
 myProjectBtn.addEventListener("click", () => {
   pageTitle.textContent = "My Projects";
   todoList.textContent = "";
-
-  showProjectsEle(JSON.parse(localStorage.getItem("projects")), todoList);
+  for (let i = 0; i < projects.length; i++) {
+    projects[i].filterTasks(tasks, projects[i].id);
+  }
+  showProjectsEle(projects, todoList);
 })
 
 //-----------------------------------
