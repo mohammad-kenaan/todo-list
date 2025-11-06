@@ -9,7 +9,7 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   console.log("storage Empty");
 }
 
-createDefaultObjs();
+//createDefaultObjs();
 
 function createDefaultObjs() {
   const tasks = []; 
