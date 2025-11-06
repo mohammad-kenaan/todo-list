@@ -8,6 +8,7 @@ export function appControllerCanDo() {
     sendItem,
     getElementIndex,
     filterDoneTasks,
+
   }
 }
 

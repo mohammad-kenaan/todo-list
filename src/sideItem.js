@@ -5,17 +5,24 @@ import { createProjectEle } from "./projectEle.js";
 document.addEventListener("DOMContentLoaded", () => {
 
   const sideItemsProject = document.querySelectorAll(".side-item-project");
+
+  const myProjectsEle = document.querySelector(".my-list-projects");
   const pageTitle = document.querySelector(".page-title");
   const todoListEle = document.querySelector(".todo-list");
   const doneTasksEleContainer = document.querySelector(".done-tasks");
   const archiveTasksEleContainer = document.querySelector(".fav-tasks-container");
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  const projects = JSON.parse(localStorage.getItem("projects")) || [];  
+  const projects = JSON.parse(localStorage.getItem("projects")) || [];
 
   const Controller = appControllerCanDo();
 
-  sideItemsProject.forEach(projectEle => {
-    projectEle.addEventListener("click", (e) => {
+
+  //-----------------------------------
+
+
+  myProjectsEle.addEventListener("click", (e) => {
+    console.log("yop");
+    if (e.target.nodeName === "SPAN") {
 
       todoListEle.textContent = "";
       const projectElement = e.target;
@@ -23,13 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const clickerProjectIndex = Controller.getElementIndex(projects, projectElementId);
       pageTitle.textContent = projects[clickerProjectIndex].name;
-
-
       if (projects[clickerProjectIndex]) {
         todoListEle.append(createProjectEle(projects[clickerProjectIndex]));
       }
-    })
+    }
   })
+
 
   doneTasksEleContainer.addEventListener("click", (e) => {
     if (e.target.nodeName === "SPAN") {
@@ -38,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
       todoListEle.textContent = "";
       let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
       pageTitle.textContent = tasks[itemIndexInTasks].title;
+
       if (itemIndexInTasks === -1) console.log("Item Not founded");
       else {
         const todoEle = createTodoEle(tasks[itemIndexInTasks]);
@@ -65,6 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+
 
 })
 

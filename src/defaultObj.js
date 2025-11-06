@@ -6,13 +6,14 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   JSON.parse(localStorage.getItem("doneTasks")) == undefined ||
   JSON.parse(localStorage.getItem("tasks")) == undefined) {
   createDefaultObjs();
+  console.log("storage Empty");
 }
 
 //createDefaultObjs();
 
 function createDefaultObjs() {
-  const tasks = [];  // has tasks Objescts
-  const projects = [];  // has Projects Objescts
+  const tasks = []; 
+  const projects = []; 
 
   let task1 = createTask(
     "Task Title: Create Home Page",
@@ -163,7 +164,7 @@ function createDefaultObjs() {
     "This is just a test Todo from Default file",
     "Priority: Medium",
     new Date(2025, 10, 9, 9, 0).toISOString(),
-    undefined,
+    100,
     0,
     false,
     303,
@@ -182,28 +183,24 @@ function createDefaultObjs() {
     123,
     "Web Development",
     "In this Project we will focuse on Learn HTML",
-    123,
     false);
 
   const project2 = createProject(
     456,
     "Information Technology",
     "In this Project we will focuse on Learn Networking",
-    456,
     false);
 
   const project3 = createProject(
     789,
     "Software Eng",
     "In this Project we will focuse on Learn Problem Solving",
-    789,
     false);
 
   const general = createProject(
     100,
     "General",
     "Tasks not assigned to any project yet.",
-    100,
     false);
 
   projects.push(project1, project2, project3, general);

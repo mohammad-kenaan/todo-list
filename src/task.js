@@ -31,7 +31,8 @@ function taskCanDo() {
   return {
     isTaskChecked,
     deletetask,
-    updateTask
+    updateTask,
+    filterProjects,
 
   }
 }
@@ -42,7 +43,6 @@ function isTaskChecked(task) {
 
 
 function deletetask(arr, id) {
-
   const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1);
 
@@ -58,3 +58,6 @@ function updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityI
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+function filterProjects(projectsArr, id) {
+  return projectsArr.filter(project => +project.id == +id);
+}
