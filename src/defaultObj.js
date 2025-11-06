@@ -159,20 +159,10 @@ function createDefaultObjs() {
     303,
   );
 
-  let task14 = createTask(
-    "Task Title: Test Task",
-    "This is just a test Todo from Default file",
-    "Priority: Medium",
-    new Date(2025, 10, 9, 9, 0).toISOString(),
-    100,
-    0,
-    false,
-    303,
-  );
 
   const newTasks = [
     task1, task2, task3, task4, task5, task6,
-    task7, task8, task9, task10, task11, task12, task13, task14
+    task7, task8, task9, task10, task11, task12, task13
   ];
 
   tasks.push(...newTasks);

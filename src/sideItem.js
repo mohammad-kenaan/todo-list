@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   myProjectsEle.addEventListener("click", (e) => {
-    console.log("yop");
     if (e.target.nodeName === "SPAN") {
 
       todoListEle.textContent = "";
