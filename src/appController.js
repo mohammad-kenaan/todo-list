@@ -6,9 +6,9 @@ import "./sideItem.js";
 import { showTasksEle, showSideItems } from "./itemsDisplay.js";
 import { showProjectsEle } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
-import {getTodayTasks} from "./today.js";
-import {getUpcomingTasks} from "./upcomingTasks.js";
-import {createTask} from "./task.js";
+import { getTodayTasks } from "./today.js";
+import { getUpcomingTasks } from "./upcomingTasks.js";
+import { createTask } from "./task.js";
 
 
 const Controller = appControllerCanDo();
@@ -25,9 +25,9 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
   task.personId,
   task.isChecked,
   task.id
-)) || []; 
+)) || [];
 
-const projects = JSON.parse(localStorage.getItem("projects")) || [];  
+const projects = JSON.parse(localStorage.getItem("projects")) || [];
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 const btnToday = document.querySelector("#btn-today");
@@ -55,11 +55,17 @@ inboxBtn.addEventListener("click", () => {
 
 })
 
+//-----------------------------------
+
+
 myProjectBtn.addEventListener("click", () => {
   pageTitle.textContent = "My Projects";
   todoList.textContent = "";
+
   showProjectsEle(JSON.parse(localStorage.getItem("projects")), todoList);
 })
+
+//-----------------------------------
 
 archiveBtn.addEventListener("click", () => {
   pageTitle.textContent = "Archive";
@@ -81,13 +87,13 @@ doneTasksBtn.addEventListener("click", () => {
 btnToday.addEventListener("click", () => {
   pageTitle.textContent = "Today Tasks";
   todoList.textContent = "";
- showTasksEle(getTodayTasks(tasks), todoList)
+  showTasksEle(getTodayTasks(tasks), todoList)
 })
 
 upcoming.addEventListener("click", () => {
   pageTitle.textContent = "Upcomming Tasks";
   todoList.textContent = "";
- showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
+  showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
 
 })
 

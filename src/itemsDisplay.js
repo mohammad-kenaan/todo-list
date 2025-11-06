@@ -9,15 +9,18 @@ export function showTasksEle(tasksOfObj, HtmlEle) {
     HtmlEle.append(todoEle);
   });
 }
+//-----------------------------------
 
 export function showProjectsEle(ProjectsObj, htmlEle) {
-
   ProjectsObj.forEach(project => {
     const proEle = createProjectEle(project);
     htmlEle.append(proEle)
   })
 }
 
+
+
+//-----------------------------------
 export function showSideItems(arr, HtmlEle, type) {
   let counter = 0;
   arr.forEach((task) => {
@@ -29,10 +32,9 @@ export function showSideItems(arr, HtmlEle, type) {
 }
 
 export function showSelecteOption(arr) {
-
+  let selectedOptions = document.querySelector("#project-id");
+  selectedOptions.textContent = "";
   arr.forEach((project) => {
-    let selectedOptions = document.querySelector("#project-id");
-
     const option = document.createElement("option");
     const spaanHash = document.createElement("span");
     spaanHash.textContent = "# " + project.id + " ";

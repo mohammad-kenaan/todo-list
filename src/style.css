@@ -464,6 +464,9 @@ dialog form .dialog-card-content {
 }
 
 dialog form .dialog-card-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   button {
     padding: 0.5em 3em;
@@ -472,6 +475,7 @@ dialog form .dialog-card-info {
     border-radius: 15px;
     font-size: 1.2rem;
     font-weight: 600;
+    
   }
 
   #cancel, #cancel-project {
