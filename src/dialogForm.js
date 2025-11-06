@@ -1,6 +1,9 @@
 import { createTask } from "./task.js";
-import { showSelecteOption } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
+import { showTasksEle, showSelecteOption } from "./itemsDisplay.js";
+import { createProject } from "./project.js";
+
+
 
 
 const Controller = appControllerCanDo();
@@ -9,14 +12,26 @@ const formSubmit = document.querySelector("#confirmBtn");
 const cancelProcess = document.querySelector("#cancel");
 const form = document.getElementById('my-form');
 const openDialog = document.querySelector('.menu-add-task');
+const todoList = document.querySelector('.todo-list');
 
 
 
-let projects = JSON.parse(localStorage.getItem("projects"));
+const projects = JSON.parse(localStorage.getItem("projects")).map(project => createProject(
+  project.id,
+  project.name,
+  project.description,
+)) || [];
 
-
-const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-//----------------------------------------
+const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
+  task.title,
+  task.description,
+  task.priority,
+  task.dueDate,
+  task.projectId,
+  task.personId,
+  task.isChecked,
+  task.id
+)) || [];//----------------------------------------
 
 openDialog.addEventListener("click", () => {
 
@@ -52,25 +67,31 @@ formSubmit.addEventListener("click", (e) => {
 
 
 
+
+
+  tasks.unshift(task);
+
+  const filterProjectsArray = task.filterProjects(projects, projectSelected);
+  let projectIndex;
+  filterProjectsArray.map((project) => {
+    projectIndex = Controller.getElementIndex(projects, project.id);
+    projects[projectIndex].tasksList.unshift(task);
+    console.log(projects[projectIndex].tasksList[0]);
+  })
+
   console.log("Task inputs are: -------");
   console.log("title is: " + title);
   console.log("desc is:  " + description);
   console.log("Proj selected is: " + projectSelected);
+  console.log("Proj selected index exist in Projects array at index num: " + projects[projectIndex]);
+  console.log("Proj selected id " + projects[projectIndex].id);
   console.log("-----------------");
 
-  const filterProjectsArray = task.filterProjects(projects, projectSelected);
-
-  filterProjectsArray.map((project) => {
-   const projectIndex = Controller.getElementIndex(projects,project.id);
-    projects[projectIndex].tasksList.unshift(task);
-  })
-
-
-  tasks.push(task);
   localStorage.setItem("tasks", JSON.stringify(tasks));
-  localStorage.setItem("projects", JSON.stringify(projects));
+  // localStorage.setItem("projects", JSON.stringify(projects));
+  projects[projectIndex].filterTasks(tasks, projects[projectIndex].id);
 
 
-
+  showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
   dialogElem.close();
 })
