@@ -9,7 +9,7 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   console.log("storage Empty");
 }
 
-//createDefaultObjs();
+createDefaultObjs();
 
 function createDefaultObjs() {
   const tasks = []; 
@@ -17,7 +17,7 @@ function createDefaultObjs() {
 
   let task1 = createTask(
     "Task Title: Create Home Page",
-    "Design and implement the main landing page with hero section, navigation bar, and call-to-action button.",
+    "Design and implement the main landing page with hero section, navigation bar, and call-to-action button!.",
     "Priority: High",
     new Date().toISOString(),
     123,
