@@ -44,7 +44,8 @@ console.log("description is:" + description);
       );
 
   projects.unshift(project);
-  localStorage.setItem("projects", JSON.stringify(projects))
+  localStorage.setItem("projects", JSON.stringify(projects));
+  projectsElement.textContent = "";
   showSideItems(projects, projectsElement, "project");
 
 
