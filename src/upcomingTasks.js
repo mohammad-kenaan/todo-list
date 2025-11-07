@@ -1,4 +1,3 @@
-
 export function getUpcomingTasks(tasks) {
   const now = new Date();
 

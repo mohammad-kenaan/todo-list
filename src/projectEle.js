@@ -1,6 +1,3 @@
-
-
-
 export function createProjectEle(project) {
   
   const todoProject = createEle("div", "todo-item");
@@ -10,11 +7,9 @@ export function createProjectEle(project) {
   const head = createEle("h1", "head");
   head.textContent = project.name;
 
-
   const mainDescripton = createEle("div", "main-descripton");
   const mainDescriptonSpan = createEle("span", "main-descripton-span");
   const mainDescriptonP = createEle("p", "main-descripton-p");
-
   mainDescriptonSpan.textContent = "Description";
   mainDescriptonP.textContent = project.description;
 
@@ -71,7 +66,6 @@ export function createProjectEle(project) {
 
   headerRow.append(thId, thName);
 
-
   project.tasksList.forEach(obj => {
     const tdId = document.createElement("td");
     tdId.style.padding = "15px";
@@ -86,7 +80,6 @@ export function createProjectEle(project) {
     row.style.borderBottom = "3px solid gray";
 
     row.append(tdId, tdName);
-
     table.appendChild(row);
 
   });
@@ -96,13 +89,9 @@ export function createProjectEle(project) {
   // ---------- apend child to dom
 
   mainDescripton.append(mainDescriptonSpan, mainDescriptonP);
-
   checkboxLabel.append(checkboxLabelSpanOn, checkboxLabelSpanOff);
   checkBoxContainer.append(checkbox, checkboxLabel);
-
   todoBtnsDetails.append(todoBtnCancel, todoBtnDelete);
-
-
   todoProject.append(head, mainDescripton, checkBoxContainer, projectTasksList);
   return todoProject;
 
@@ -116,5 +105,4 @@ function createEle(eleType, eleClass, option = undefined) {
     ele.name = eleClass;
   }
   return ele;
-
 }

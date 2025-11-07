@@ -10,15 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const doneTasksEleContainer = document.querySelector(".done-tasks");
   const archiveTasksEleContainer = document.querySelector(".fav-tasks-container");
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-
   const Controller = appControllerCanDo();
 
   myProjectsEle.addEventListener("click", (e) => {
     const projects = JSON.parse(localStorage.getItem("projects")).map(project => createProject(
-      project.id,
       project.name,
       project.description,
+      project.id
           )) || [];
 
     if (e.target.nodeName === "SPAN") {
@@ -42,14 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
       todoListEle.textContent = "";
       let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
       pageTitle.textContent = tasks[itemIndexInTasks].title;
-
       if (itemIndexInTasks === -1) console.log("Item Not founded");
       else {
         const todoEle = createTodoEle(tasks[itemIndexInTasks]);
         Controller.unExpandItems(todoEle);
         todoListEle.append(todoEle);
       }
-
     }
   });
 
@@ -60,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
       todoListEle.textContent = "";
       let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
       pageTitle.textContent = tasks[itemIndexInTasks].title;
-
       if (itemIndexInTasks === -1) console.log("Item Not founded");
       else {
         const todoEle = createTodoEle(tasks[itemIndexInTasks]);

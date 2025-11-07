@@ -8,11 +8,8 @@ export function appControllerCanDo() {
     sendItem,
     getElementIndex,
     filterDoneTasks,
-
   }
 }
-
-
 
 function expandItem(itemClicked) {
   itemClicked.classList.add('expand');
@@ -71,11 +68,6 @@ function filterDoneTasks(tasks) {
     }
   });
   localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-}
-
-function editFun(id, arr, newObj) {
-  const index = arr.findIndex((ele) => ele.id == id);
-  arr.splice(index, 1, newObj);
 }
 
 

@@ -1,24 +1,23 @@
-// import { taskCanDo } from "./features";
 export function createTask(
   title,
-  description,
-  priority,
-  dueDate,
-  projectId = 100,
+  description = "Please add a task description",
+  priority = 3,
+  dueDate = new Date(),
+  projectId = 4,
   personId = 1,
-  isChecked,
-  id = Math.floor(Date.now() / 1000),
+  isChecked = false,
+  id = null
 ) {
   const taskObj = {
-    title: title,
-    description: description,
-    priority: priority,
-    dueDate: dueDate,
-    projectId: projectId,
-    personId: personId,
-    isChecked: isChecked,
+    title,
+    description,
+    priority,
+    dueDate,
+    projectId,
+    personId,
+    isChecked,
     type: "task",
-    id: id,
+    id: id || generateTaskId(),
   }
   return {
     ...taskObj,
@@ -41,23 +40,36 @@ function isTaskChecked(task) {
   return task.checked;
 }
 
-
 function deletetask(arr, id) {
   const index = arr.findIndex((ele) => ele.id == id);
   arr.splice(index, 1);
 
 }
 
-
 function updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp) {
+  const pageTitle = document.querySelector(".page-title");
+  pageTitle.textContent = "Inbox";
   const task = tasks[clickedTodoItemIndex];
-  task.title = titleInp,
-    task.dueDate = dueDateInp,
-    task.priority = priorityInp,
-    task.description = descriptionInp
+  task.title = titleInp || task.title,
+    task.dueDate = dueDateInp || task.dueDate,
+    task.priority = priorityInp || task.priority,
+    task.description = descriptionInp || task.description
   localStorage.setItem("tasks", JSON.stringify(tasks));
+
 }
 
 function filterProjects(projectsArr, id) {
   return projectsArr.filter(project => +project.id == +id);
+}
+
+function generateTaskId() {
+  if (!localStorage.getItem("taskIdCounter")) {
+    localStorage.setItem("taskIdCounter", JSON.stringify(0));
+  }
+
+  let counter = JSON.parse(localStorage.getItem("taskIdCounter"));
+  counter++;
+  localStorage.setItem("taskIdCounter", JSON.stringify(counter));
+
+  return counter;
 }

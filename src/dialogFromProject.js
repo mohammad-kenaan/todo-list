@@ -1,7 +1,5 @@
-
 import { createProject } from "./project.js";
 import { showSideItems, showProjectsEle } from "./itemsDisplay.js";
-
 
 const openDialog = document.querySelector('.add-project');
 const dialogElem = document.getElementById("dialog-project");
@@ -10,17 +8,12 @@ const cancelProcess = document.querySelector("#cancel-project");
 const form = document.getElementById('my-form-project');
 const projectsElement = document.querySelector('.progects-list');
 const todoList = document.querySelector('.todo-list');
-
-
-//-----------------------------------
 let projects;
-
 
 openDialog.addEventListener("click", () => {
   projects = JSON.parse(localStorage.getItem("projects"));
   dialogElem.showModal();
   form.reset();
-
 });
 
 cancelProcess.addEventListener("click", () => {
@@ -33,28 +26,32 @@ formSubmit.addEventListener("click", (e) => {
 
   const title = document.getElementById('title-project').value;
   const description = document.getElementById('description-project').value;
-  const id = document.getElementById('project-input-id').value;
+  document.getElementById('title-project').setAttribute("required", "");
+  document.getElementById('description-project').setAttribute("required", "");
 
-  const project =
-    createProject(
-      id,
-      title,
-      description,
-    );
+  if (title != "" && description != "") {
+    const project =
+      createProject(
+        title,
+        description,
+      );
 
+    projectsElement.textContent = "";
+    todoList.textContent = "";
 
-  projectsElement.textContent = "";
-  todoList.textContent = "";
+    const filterTasksArray = project.filterTasks(JSON.parse(localStorage.
+      getItem("tasks")), project.id);
 
-  const filterTasksArray = project.filterTasks(JSON.parse(localStorage.getItem("tasks")), project.id);
+    project.tasksList = filterTasksArray;
+    projects.unshift(project);
+    localStorage.setItem("projects", JSON.stringify(projects));
 
-  project.tasksList = filterTasksArray;
-  projects.unshift(project);
-  localStorage.setItem("projects", JSON.stringify(projects));
+    showSideItems(JSON.parse(localStorage.
+      getItem("projects")), projectsElement, "project");
 
-  showSideItems(JSON.parse(localStorage.getItem("projects")), projectsElement, "project");
-  
-  showProjectsEle(JSON.parse(localStorage.getItem("projects")), todoList);
+    showProjectsEle(JSON.parse(localStorage.
+      getItem("projects")), todoList);
 
-  dialogElem.close();
+    dialogElem.close();
+  }
 })

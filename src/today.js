@@ -1,4 +1,3 @@
-
 export function getTodayTasks(tasks) {
   const today = new Date();
   const todayYear = today.getFullYear();

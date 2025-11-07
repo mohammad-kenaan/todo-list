@@ -17,21 +17,23 @@ const doneTaskListEle = document.querySelector('.list-done-tasks');
 const favTasksElement = document.querySelector('.fav-tasks-container');
 const projectsElement = document.querySelector('.progects-list');
 
-const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
-  task.title,
-  task.description,
-  task.priority,
-  task.dueDate,
-  task.projectId,
-  task.personId,
-  task.isChecked,
-  task.id
-)) || [];
-const projects = JSON.parse(localStorage.getItem("projects")).map(project => createProject(
-  project.id,
-  project.name,
-  project.description,
-)) || [];
+const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
+  createTask(
+    task.title,
+    task.description,
+    task.priority,
+    task.dueDate,
+    task.projectId,
+    task.personId,
+    task.isChecked,
+    task.id
+  )) || [];
+const projects = JSON.parse(localStorage.getItem("projects")).map(project =>
+  createProject(
+    project.name,
+    project.description,
+    project.id
+  )) || [];
 
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
@@ -54,14 +56,12 @@ inboxBtn.addEventListener("click", () => {
   favTasksElement.textContent = "";
   doneTaskListEle.textContent = "";
   Controller.filterDoneTasks(tasks);
-  showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
-  showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
+  showSideItems(JSON.parse(localStorage.getItem("doneTasks")),
+    doneTaskListEle, "task");
+  showSideItems(JSON.parse(localStorage.getItem("archive")),
+    favTasksElement, "task");
   showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-
 })
-
-//-----------------------------------
-
 
 myProjectBtn.addEventListener("click", () => {
   pageTitle.textContent = "My Projects";
@@ -71,8 +71,6 @@ myProjectBtn.addEventListener("click", () => {
   }
   showProjectsEle(projects, todoList);
 })
-
-//-----------------------------------
 
 archiveBtn.addEventListener("click", () => {
   pageTitle.textContent = "Archive";
@@ -88,7 +86,6 @@ doneTasksBtn.addEventListener("click", () => {
   todoList.textContent = "";
   showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
   showTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList);
-
 })
 
 btnToday.addEventListener("click", () => {
@@ -101,7 +98,6 @@ upcoming.addEventListener("click", () => {
   pageTitle.textContent = "Upcomming Tasks";
   todoList.textContent = "";
   showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
-
 })
 
 

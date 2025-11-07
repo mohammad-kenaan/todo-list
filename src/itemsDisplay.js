@@ -2,14 +2,12 @@ import { createTodoEle } from "./todoEle.js";
 import { createSideListEle } from "./sideListEle.js";
 import { createProjectEle } from "./projectEle.js";
 
-
 export function showTasksEle(tasksOfObj, HtmlEle) {
   tasksOfObj.forEach((task) => {
     const todoEle = createTodoEle(task);
     HtmlEle.append(todoEle);
   });
 }
-//-----------------------------------
 
 export function showProjectsEle(ProjectsObj, htmlEle) {
   ProjectsObj.forEach(project => {
@@ -18,9 +16,6 @@ export function showProjectsEle(ProjectsObj, htmlEle) {
   })
 }
 
-
-
-//-----------------------------------
 export function showSideItems(arr, HtmlEle, type) {
   let counter = 0;
   arr.forEach((task) => {

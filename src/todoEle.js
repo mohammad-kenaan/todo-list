@@ -1,11 +1,7 @@
-
-
 export function createTodoEle(task) {
-
   const todoItem = createEle("div", "todo-item");
   todoItem.dataset.id = task.id;
   todoItem.dataset.eleType = "task";
-
   // ----------- Head
   const head = createEle("h1", "head");
   head.textContent = task.title;
@@ -97,7 +93,6 @@ export function createTodoEle(task) {
   todoBtnUpdate.textContent = "Update";
   todoBtnUpdate.type = "button";
   todoBtnUpdate.dataset.btnType = "update";
-
 
   const todoBtnCancel = createEle("button", "btn-cancel");
   todoBtnCancel.textContent = "Cancel";

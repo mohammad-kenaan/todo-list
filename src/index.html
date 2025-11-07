@@ -73,7 +73,6 @@
       </div>
     </div>
 
-
     <div class="menu">
       <div class="container" id="menu-container">
         <div class="menu-header">
@@ -90,20 +89,16 @@
   </div>
 
   <dialog id="dialog">
-
     <form id="my-form" autofocus>
-
       <fieldset class="dialog-card-content">
         <legend>Todo Details</legend>
         <div class="dialog-form-container">
 
           <p> <label for="title">Title</label> </p>
-          <p> <input type="text" name="title" id="title"> </p>
+          <p> <input type="text" name="title" id="title" required> </p>
 
           <p> <label for="priority">Priority</label> </p>
-          <p> <input type="number" name="priority" id="priority"> </p>
-
-
+          <p> <input type="number" name="priority" id="priority" value="3"> </p>
 
           <select id="project-id">
             <button>
@@ -112,7 +107,6 @@
             <option value="">Assign to Project</option>
           </select>
           <p> <label for="due-date">Due date </label> </p>
-          <!--    edit the next input  -->
           <p> <input type="date" name="due-date" id="due-date"></p>
         </div>
         <fieldset id="textarea">
@@ -131,33 +125,24 @@
 
 
   <dialog id="dialog-project">
-
     <form id="my-form-project" autofocus>
-
       <fieldset class="dialog-card-content">
         <legend>Project Details</legend>
         <div class="dialog-form-container">
-
           <p> <label for="title-project">Title</label> </p>
-          <p> <input type="text" name="title-project" id="title-project"> </p>
-
-          <p> <label for="project-input-id">Id</label> </p>
-          <p> <input type="number" name="project-input-id" id="project-input-id"> </p>
-
+          <p> <input type="text" name="title-project" id="title-project" required
+            placeholder="My Project"> </p>
         </div>
-
         <fieldset id="textarea-project">
           <legend>Description</legend>
-          <textarea name="description-project" id="description-project"></textarea>
+          <textarea name="description-project" id="description-project"
+          placeholder="Let's write a description here"></textarea>
         </fieldset>
-
       </fieldset>
-
       <div class="dialog-card-info">
         <button id="cancel-project" formmethod="dialog">Cancel</button>
         <button formmethod="dialog" id="confirm-project" type="button">Confirm</button>
       </div>
-
     </form>
   </dialog>
 
