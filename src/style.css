@@ -133,13 +133,17 @@ body {
   padding: 1rem;
   border-radius: 15px;
   cursor: pointer;
-  
 
+  .project-head {
+    color: gray;
+    display: flex;
+    justify-content: right;
+  }
 
   h1 {
     font-weight: 600;
     font-size: 1.4rem;
-    margin-bottom: 0.7em;
+    margin: 0.8em 0;
   }
 
   .main-descripton,
@@ -231,7 +235,7 @@ table td:hover {
 }
 
 .expand {
-  
+
   background: rgb(237, 237, 237);
   border: 1px solid red;
   transition: all 2.4s;
@@ -447,7 +451,8 @@ dialog form .dialog-card-content {
 
   }
 
-  #textarea,  #textarea-project {
+  #textarea,
+  #textarea-project {
     padding: 5px;
     flex-grow: 1;
 
@@ -475,13 +480,51 @@ dialog form .dialog-card-info {
     border-radius: 15px;
     font-size: 1.2rem;
     font-weight: 600;
-    
+
   }
 
-  #cancel, #cancel-project {
+  #cancel,
+  #cancel-project {
     background-color: #c52d07;
     margin: 30px;
   }
 }
 
-/* ----Form in Dialog Style end------ */
+.warning-message {
+  display: none;
+  z-index: 999;
+  position: fixed;
+  top: 20%;
+  right: 40%;
+  background-color: var(--color-primary);
+  color: var(--color-btn-text);
+  border-radius: 5px;
+  font-size: 1.2rem;
+  width: 350px;
+  height: 120px;
+
+}
+
+#title-warning-message {
+  height: 73px;
+  font-size: 1.2rem;
+  padding: 1em;
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.warning-close-btn {
+  font-weight: 700;
+  border-bottom-left-radius: 5px;
+  text-align: center;
+  background: var(--color-button-red);
+  color: var(--color-btn-text);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 0.6em;
+}
+
+.warning-message-show {
+  display: block;
+}

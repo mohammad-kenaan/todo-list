@@ -8,6 +8,8 @@ export function appControllerCanDo() {
     sendItem,
     getElementIndex,
     filterDoneTasks,
+    showWarning,
+    closeWarning
   }
 }
 
@@ -34,12 +36,8 @@ function unExpandItems() {
 
 function addNewItemOnCancelBtnsNodeList() {
   const btnsCancel = document.querySelectorAll(".btn-cancel");
-  console.log("we have Btns cancel: " + btnsCancel.length);
-  console.log(btnsCancel);
   btnsCancel.forEach((btnCancel) => {
-    console.log(btnCancel.dataset.id);
     btnCancel.addEventListener("click", () => {
-      console.log("cancel btn clicked");
       unExpandItems();
     })
   })
@@ -48,12 +46,13 @@ function addNewItemOnCancelBtnsNodeList() {
 function sendItem(from, to, index, keyName) {
   if (from[index]) {
     if (to.find(obj => obj.id === from[index].id)) {
-      console.log("we have ");
+      showWarning("Item already Archived");
       return;
     }
     to.unshift(from[index]);
     localStorage.setItem(keyName, JSON.stringify(to));
   }
+
 }
 
 function getElementIndex(arrayStorage, id) {
@@ -71,7 +70,15 @@ function filterDoneTasks(tasks) {
 }
 
 
+export function showWarning(content) {
+  const warning = document.querySelector(".warning-message");
+  const warningMsgTitle = document.getElementById("title-warning-message");
+  warningMsgTitle.textContent = content;
+  warning.classList.add("warning-message-show");
+}
 
-
-
-
+export function closeWarning() {
+  const warning = document.querySelector(".warning-close-btn");
+  const warningContainer = document.querySelector(".warning-message");
+  warningContainer.classList.remove("warning-message-show");
+}

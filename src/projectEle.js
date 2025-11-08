@@ -1,5 +1,5 @@
 export function createProjectEle(project) {
-  
+
   const todoProject = createEle("div", "todo-item");
   todoProject.dataset.id = project.id;
   todoProject.dataset.eleType = "project";
@@ -65,24 +65,26 @@ export function createProjectEle(project) {
   thName.style.padding = "15px";
 
   headerRow.append(thId, thName);
+  if (project.tasksList!== undefined) {
+    project.tasksList.forEach(obj => {
+      const tdId = document.createElement("td");
+      tdId.style.padding = "15px";
 
-  project.tasksList.forEach(obj => {
-    const tdId = document.createElement("td");
-    tdId.style.padding = "15px";
+      const tdName = document.createElement("td");
+      tdName.style.padding = "15px";
 
-    const tdName = document.createElement("td");
-    tdName.style.padding = "15px";
+      tdId.textContent = obj.id;
+      tdName.textContent = obj.title;
 
-    tdId.textContent = obj.id;
-    tdName.textContent = obj.title;
+      const row = document.createElement("tr");
+      row.style.borderBottom = "3px solid gray";
 
-    const row = document.createElement("tr");
-    row.style.borderBottom = "3px solid gray";
+      row.append(tdId, tdName);
+      table.appendChild(row);
 
-    row.append(tdId, tdName);
-    table.appendChild(row);
+    });
+  }
 
-  });
 
   projectTasksList.appendChild(table);
 

@@ -9,7 +9,8 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   console.log("storage Empty");
 }
 
-createDefaultObjs();
+
+//createDefaultObjs();
 
 function createDefaultObjs() {
   const tasks = [];
@@ -25,6 +26,7 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task1.belongTo = "Web Development";
 
   let task2 = createTask(
     "Task Title: Design Contact Page",
@@ -36,6 +38,7 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task2.belongTo = "Web Development";
 
   let task3 = createTask(
     "Task Title: Build About Page",
@@ -47,6 +50,7 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task3.belongTo = "Web Development";
 
   let task4 = createTask(
     "Task Title: Add Navbar Component",
@@ -58,6 +62,8 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task4.belongTo = "Web Development";
+
 
   let task5 = createTask(
     "Task Title: Implement Footer Section",
@@ -69,6 +75,8 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task5.belongTo = "Web Development";
+
 
   let task6 = createTask(
     "Task Title: Setup Network Topology",
@@ -80,6 +88,8 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task6.belongTo = "Information Technology";
+
 
   let task7 = createTask(
     "Task Title: Configure VLANs",
@@ -91,6 +101,8 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task7.belongTo = "Information Technology";
+
 
   let task8 = createTask(
     "Task Title: Setup DHCP and DNS Services",
@@ -102,6 +114,8 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task8.belongTo = "Information Technology";
+
 
   let task9 = createTask(
     "Task Title: Implement Firewall Rules",
@@ -113,6 +127,8 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task9.belongTo = "Information Technology";
+
 
   let task10 = createTask(
     "Task Title: Perform Network Testing",
@@ -124,6 +140,8 @@ function createDefaultObjs() {
     0,
     true,
   );
+  task10.belongTo = "Information Technology";
+
 
   let task11 = createTask(
     "Task Title: Design System Architecture",
@@ -136,6 +154,8 @@ function createDefaultObjs() {
     false,
   );
 
+  task11.belongTo = "Software Eng";
+
   let task12 = createTask(
     "Task Title: Implement Authentication Module",
     "Develop a secure user authentication and authorization module with password hashing and session management.",
@@ -145,6 +165,7 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task12.belongTo = "Software Eng";
 
   let task13 = createTask(
     "Task Title: Write Unit Tests",
@@ -155,6 +176,7 @@ function createDefaultObjs() {
     0,
     false,
   );
+  task13.belongTo = "Software Eng";
 
   const newTasks = [
     task1, task2, task3, task4, task5, task6,
@@ -179,16 +201,17 @@ function createDefaultObjs() {
   const general = createProject(
     "General",
     "Tasks not assigned to any project yet.",
-    );
+  );
 
   projects.push(project1, project2, project3, general);
 
   const doneTasks = [task10];
   const archive = [task12];
+
   localStorage.setItem("tasks", JSON.stringify(tasks));
   localStorage.setItem("projects", JSON.stringify(projects));
   localStorage.setItem("archive", JSON.stringify(archive));
-  localStorage.setItem("doneTasks", JSON.stringify(doneTasks)); 
+  localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
 
 }
 

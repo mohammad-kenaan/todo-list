@@ -2,6 +2,13 @@ export function createTodoEle(task) {
   const todoItem = createEle("div", "todo-item");
   todoItem.dataset.id = task.id;
   todoItem.dataset.eleType = "task";
+
+  // --------- Belong to Project
+  const projectIdContainer = createEle("div", "project-head");
+  const projectId = createEle("h4", "project-head");
+  projectId.textContent = "From Project: #" + task.belongTo;
+
+
   // ----------- Head
   const head = createEle("h1", "head");
   head.textContent = task.title;
@@ -73,18 +80,20 @@ export function createTodoEle(task) {
   const todoInputDueDate = createEle("input", "todo-input-due-date", "date");
   const todoInputPriority = createEle("input", "todo-input-priority");
 
-  todoInputTitle.id = "title-inp-id"+ task.id;
-  todoInputDueDate.id = "due-date-inp-id"+ task.id;
-  todoInputPriority.id = "priority-inp-id"+ task.id;
+  todoInputTitle.id = "title-inp-id" + task.id;
+  todoInputDueDate.id = "due-date-inp-id" + task.id;
+  todoInputPriority.id = "priority-inp-id" + task.id;
 
   //------------- todo textarea description
   const todoInputDescription = createEle("div", "description");
 
-  const todoInputDescriptionLabel = createEle("p", "todo-input-description-label");
+  const todoInputDescriptionLabel =
+    createEle("p", "todo-input-description-label");
   todoInputDescriptionLabel.textContent = "Dsecription";
 
-  const todoInputDescriptionTextarea = createEle("textarea", "todo-input-description-textarea", "textarea-description");
-  todoInputDescriptionTextarea.id = "todo-inp-textarea"+ task.id;
+  const todoInputDescriptionTextarea = createEle("textarea",
+    "todo-input-description-textarea", "textarea-description");
+  todoInputDescriptionTextarea.id = "todo-inp-textarea" + task.id;
 
   //---------Todo Btns Detailes
   const todoBtnsDetails = createEle("div", "btns-details");
@@ -111,21 +120,26 @@ export function createTodoEle(task) {
 
   // ---------- apend child to dom
 
+  projectIdContainer.append(projectId)
+
   mainDescripton.append(mainDescriptonSpan, mainDescriptonP);
   dueDate.append(dueDateSpan, dueDateP);
 
   checkboxLabel.append(checkboxLabelSpanOn, checkboxLabelSpanOff);
   checkBoxContainer.append(checkbox, checkboxLabel);
 
-  todoBtnsDetails.append(todoBtnAddtoFavorite, todoBtnUpdate, todoBtnCancel, todoBtnDelete);
-  todoInputDescription.append(todoInputDescriptionLabel, todoInputDescriptionTextarea)
+  todoBtnsDetails.append(todoBtnAddtoFavorite, todoBtnUpdate, todoBtnCancel,
+    todoBtnDelete);
+  todoInputDescription.append(todoInputDescriptionLabel,
+    todoInputDescriptionTextarea)
   todoInputs.append(todoInputTitle, todoInputDueDate, todoInputPriority);
   todoDetails.append(todoTitle, todoDueDate, todoPriority)
   fieldset.append(legend, todoDetails, todoInputs, todoInputDescription)
   form.append(fieldset, todoBtnsDetails);
   hiddenDetailsContainer.append(form);
 
-  todoItem.append(head, mainDescripton, dueDate, checkBoxContainer, hiddenDetailsContainer);
+  todoItem.append(projectIdContainer, head, mainDescripton, dueDate,
+    checkBoxContainer, hiddenDetailsContainer);
   return todoItem;
 }
 

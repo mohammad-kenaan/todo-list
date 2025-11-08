@@ -1,10 +1,18 @@
 import { createTodoEle } from "./todoEle.js";
+import { createArchiveEle } from "./archiveEle.js";
 import { createSideListEle } from "./sideListEle.js";
 import { createProjectEle } from "./projectEle.js";
 
 export function showTasksEle(tasksOfObj, HtmlEle) {
   tasksOfObj.forEach((task) => {
     const todoEle = createTodoEle(task);
+    HtmlEle.append(todoEle);
+  });
+}
+
+export function showArchiveTasksEle(tasksOfObj, HtmlEle) {
+  tasksOfObj.forEach((task) => {
+    const todoEle = createArchiveEle(task);
     HtmlEle.append(todoEle);
   });
 }
@@ -38,3 +46,5 @@ export function showSelecteOption(arr) {
     selectedOptions.append(option);
   });
 }
+
+
