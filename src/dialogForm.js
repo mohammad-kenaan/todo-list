@@ -15,7 +15,8 @@ const projects = JSON.parse(localStorage.getItem("projects")).map(project =>
   createProject(
     project.name,
     project.description,
-    project.id
+    project.id,
+    true
   )) || [];
 
 const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
@@ -27,7 +28,8 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
     task.projectId,
     task.personId,
     task.isChecked,
-    task.id
+    task.id,
+    true
   )) || [];
 
 openDialog.addEventListener("click", () => {
@@ -58,6 +60,7 @@ formSubmit.addEventListener("click", (e) => {
         priority,
         douDate,
         projectSelected);
+    task.belongTo = projectSelected;
 
     tasks.unshift(task);
 
@@ -71,7 +74,7 @@ formSubmit.addEventListener("click", (e) => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
     projects[projectIndex].filterTasks(tasks, projects[projectIndex].id);
     showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-    
+
     dialogElem.close();
   }
 

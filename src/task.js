@@ -1,3 +1,5 @@
+import { appControllerCanDo } from "./features.js";
+
 export function createTask(
   title,
   description = "Please add a task description",
@@ -6,7 +8,9 @@ export function createTask(
   projectId = 4,
   personId = 1,
   isChecked = false,
-  id = null
+  id = null,
+  isFromLocalStorage = false
+
 ) {
   const taskObj = {
     title,
@@ -17,13 +21,16 @@ export function createTask(
     personId,
     isChecked,
     type: "task",
-    id: id || generateTaskId(),
+    id: id || generateTaskId(isFromLocalStorage),
+    belongTo: "General"
   }
   return {
     ...taskObj,
     ...taskCanDo(),
   }
 }
+
+const Controller = appControllerCanDo();
 
 
 function taskCanDo() {
@@ -42,8 +49,13 @@ function isTaskChecked(task) {
 
 function deletetask(arr, id) {
   const index = arr.findIndex((ele) => ele.id == id);
-  arr.splice(index, 1);
-
+  if (index !== -1)
+    arr.splice(index, 1);
+  else{
+    Controller.showWarning("Item already deleted");
+    return;
+  }
+  return;
 }
 
 function updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp) {
@@ -55,21 +67,24 @@ function updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityI
     task.priority = priorityInp || task.priority,
     task.description = descriptionInp || task.description
   localStorage.setItem("tasks", JSON.stringify(tasks));
-
 }
 
 function filterProjects(projectsArr, id) {
   return projectsArr.filter(project => +project.id == +id);
 }
 
-function generateTaskId() {
-  if (!localStorage.getItem("taskIdCounter")) {
-    localStorage.setItem("taskIdCounter", JSON.stringify(0));
+function generateTaskId(importedFromLocal) {
+  if (importedFromLocal === false) {
+    if (!localStorage.getItem("taskIdCounter")) {
+      localStorage.setItem("taskIdCounter", JSON.stringify(0));
+    }
+
+    let counter = JSON.parse(localStorage.getItem("taskIdCounter"));
+    counter++;
+    localStorage.setItem("taskIdCounter", JSON.stringify(counter));
+
+    return counter;
   }
+  return;
 
-  let counter = JSON.parse(localStorage.getItem("taskIdCounter"));
-  counter++;
-  localStorage.setItem("taskIdCounter", JSON.stringify(counter));
-
-  return counter;
 }

@@ -1,10 +1,8 @@
-
 import { showTasksEle, showSideItems } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 import { createTask } from "./task.js";
 
 const Controller = appControllerCanDo();
-
 
 const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
   task.title,
@@ -14,9 +12,9 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task => createTask(
   task.projectId,
   task.personId,
   task.isChecked,
-  task.id
+  task.id,
+  true
 )) || [];
-
 
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
@@ -24,24 +22,29 @@ const todoList = document.querySelector('.todo-list');
 const doneTaskListEle = document.querySelector('.list-done-tasks');
 const favTasksElement = document.querySelector('.fav-tasks-container');
 
-
 todoList.addEventListener('click', (e) => {
   const clickedTodoItem = e.target.closest('.todo-item');
-  if (!clickedTodoItem) return;
+  if (!clickedTodoItem || clickedTodoItem === null) return;
 
-  else if (clickedTodoItem !== null) {
+  else {
     if (clickedTodoItem.dataset.eleType == "task") {
       const clickedTodoItemId = clickedTodoItem.dataset.id;
       const clickedTodoItemIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
 
       if (e.target.nodeName === "BUTTON") {
+
         const btnType = e.target.dataset.btnType;
         switch (btnType) {
           case "delete": {
-            tasks[clickedTodoItemIndex].deletetask(tasks, clickedTodoItemId);
-            todoList.textContent = "";
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+            if (tasks[clickedTodoItemIndex] === undefined) {
+              Controller.showWarning("An item has been deleted recently. Please check your list")
+            }
+            else {
+              tasks[clickedTodoItemIndex].deletetask(tasks, clickedTodoItemId);
+              todoList.textContent = "";
+              localStorage.setItem("tasks", JSON.stringify(tasks));
+              showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+            }
             break;
           }
           case "cancel": Controller.unExpandItems(); break;
@@ -59,7 +62,9 @@ todoList.addEventListener('click', (e) => {
             Controller.unExpandItems();
             localStorage.setItem("tasks", JSON.stringify(tasks));
             todoList.textContent = "";
+
             showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+
             break;
           }
 
@@ -67,13 +72,12 @@ todoList.addEventListener('click', (e) => {
             Controller.sendItem(tasks, archiveTasks, clickedTodoItemIndex, "archive");
             favTasksElement.textContent = "";
             showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
-            showTasksEle(JSON.parse(localStorage.getItem("archive")), todoList);
             Controller.unExpandItems();
             break;
           }
         }
-      }
 
+      }
       else if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
         const checkbox = e.target;
         if (tasks[clickedTodoItemIndex].isTaskChecked(checkbox)) {
@@ -93,10 +97,18 @@ todoList.addEventListener('click', (e) => {
           showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
         }
       }
+
       else {
-        Controller.unExpandItems();
-        Controller.expandItem(clickedTodoItem);
+        if (document.currentPage === "inboxPage"||
+          document.currentPage === "todayPage"||
+          document.currentPage === "ubcomingPage"
+        ) {
+          Controller.unExpandItems();
+          Controller.expandItem(clickedTodoItem);
+        }
+
       }
+
     }
   }
 })
@@ -105,3 +117,11 @@ todoList.addEventListener('click', (e) => {
 
 
 
+function displayItemsOnCurrentPage() {
+  if (document.currentPage === "homePage")
+    showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+  else if (document.currentPage === "archivePage")
+    showTasksEle(JSON.parse(localStorage.getItem("archive")), todoList);
+  else if (document.currentPage === "doneTasksPage")
+    showTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList);
+}
