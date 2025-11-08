@@ -104,7 +104,7 @@ btnToday.addEventListener("click", () => {
 })
 
 upcoming.addEventListener("click", () => {
-  document.currentPage = "ubcomingPage";
+  document.currentPage = "upcomingPage";
   pageTitle.textContent = "Upcomming Tasks";
   todoList.textContent = "";
   showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)

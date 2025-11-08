@@ -1,6 +1,8 @@
 import { showTasksEle, showSideItems } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 import { createTask } from "./task.js";
+import { getTodayTasks } from "./today.js";
+import { getUpcomingTasks } from "./upcomingTasks.js";
 
 const Controller = appControllerCanDo();
 
@@ -21,6 +23,8 @@ const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 const todoList = document.querySelector('.todo-list');
 const doneTaskListEle = document.querySelector('.list-done-tasks');
 const favTasksElement = document.querySelector('.fav-tasks-container');
+const pageTitle = document.querySelector(".page-title");
+
 
 todoList.addEventListener('click', (e) => {
   const clickedTodoItem = e.target.closest('.todo-item');
@@ -43,7 +47,8 @@ todoList.addEventListener('click', (e) => {
               tasks[clickedTodoItemIndex].deletetask(tasks, clickedTodoItemId);
               todoList.textContent = "";
               localStorage.setItem("tasks", JSON.stringify(tasks));
-              showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+
+              displayItemsOnCurrentPage();
             }
             break;
           }
@@ -63,7 +68,7 @@ todoList.addEventListener('click', (e) => {
             localStorage.setItem("tasks", JSON.stringify(tasks));
             todoList.textContent = "";
 
-            showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+            displayItemsOnCurrentPage();
 
             break;
           }
@@ -99,9 +104,9 @@ todoList.addEventListener('click', (e) => {
       }
 
       else {
-        if (document.currentPage === "inboxPage"||
-          document.currentPage === "todayPage"||
-          document.currentPage === "ubcomingPage"
+        if (document.currentPage === "inboxPage" ||
+          document.currentPage === "todayPage" ||
+          document.currentPage === "upcomingPage"
         ) {
           Controller.unExpandItems();
           Controller.expandItem(clickedTodoItem);
@@ -118,10 +123,20 @@ todoList.addEventListener('click', (e) => {
 
 
 function displayItemsOnCurrentPage() {
-  if (document.currentPage === "homePage")
+  console.log(document.currentPage);
+  if (document.currentPage === "inboxPage"){
+    pageTitle.textContent = "Inbox";
     showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-  else if (document.currentPage === "archivePage")
-    showTasksEle(JSON.parse(localStorage.getItem("archive")), todoList);
-  else if (document.currentPage === "doneTasksPage")
-    showTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList);
+  }
+    
+  else if (document.currentPage === "todayPage"){
+        pageTitle.textContent = "Today Tasks";
+    showTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
+  }
+
+  else if (document.currentPage === "upcomingPage"){
+        pageTitle.textContent = "Upcoming Tasks";
+    showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
+  }
+
 }
