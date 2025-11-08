@@ -12,6 +12,7 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
 
 //createDefaultObjs();
 
+
 function createDefaultObjs() {
   const tasks = [];
   const projects = [];
