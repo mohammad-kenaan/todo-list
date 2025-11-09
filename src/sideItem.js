@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
       else {
         pageTitle.textContent = tasks[itemIndexInTasks].title;
         const todoEle = createSummaryEle(tasks[itemIndexInTasks]);
-        Controller.unExpandItems(todoEle);
         todoListEle.append(todoEle);
       }
     }
@@ -69,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
       else {
         pageTitle.textContent = tasks[itemIndexInTasks].title;
         const todoEle = createSummaryEle(tasks[itemIndexInTasks]);
-        Controller.unExpandItems(todoEle);
         todoListEle.append(todoEle);
       }
     }

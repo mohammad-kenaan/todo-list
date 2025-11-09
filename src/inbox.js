@@ -34,7 +34,6 @@ todoList.addEventListener('click', (e) => {
     if (clickedTodoItem.dataset.eleType == "task") {
       const clickedTodoItemId = clickedTodoItem.dataset.id;
       const clickedTodoItemIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
-
       if (e.target.nodeName === "BUTTON") {
         const btnType = e.target.dataset.btnType;
         switch (btnType) {
@@ -57,12 +56,13 @@ todoList.addEventListener('click', (e) => {
               (".todo-input-title").value;
             const dueDateInp = expandedTask.querySelector
               (".todo-input-due-date").value;
-
-            const priorityInp = expandedTask.querySelector(".todo-input-priority").value;
-            const descriptionInp = expandedTask.querySelector(".todo-input-description-textarea").value;
+            const priorityInp = expandedTask.
+              querySelector(".todo-input-priority").value;
+            const descriptionInp = expandedTask.
+              querySelector(".todo-input-description-textarea").value;
 
             tasks[clickedTodoItemIndex].updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp);
-            Controller.unExpandItems();            
+            Controller.unExpandItems();
             displayItemsOnCurrentPage();
 
             break;
@@ -80,7 +80,7 @@ todoList.addEventListener('click', (e) => {
       }
       else if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
         const checkbox = e.target;
-        if (tasks[clickedTodoItemIndex].isTaskChecked(checkbox)) {
+        if (tasks[clickedTodoItemIndex].isTaskChecked(checkbox) === true) {
           tasks[clickedTodoItemIndex].isChecked = true;
           Controller.sendItem(tasks, doneTasks, clickedTodoItemIndex, "doneTasks");
           localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -98,10 +98,10 @@ todoList.addEventListener('click', (e) => {
         }
       }
       else {
-        if (document.currentPage === "inboxPage" ||
-          document.currentPage === "todayPage" ||
-          document.currentPage === "upcomingPage"
-        ) {
+        if (document.currentPage === "archivePage" ||
+          document.currentPage === "doneTasksPage" ||
+          document.currentPage === "taskFromSide") return;
+        else {
           Controller.unExpandItems();
           Controller.expandItem(clickedTodoItem);
         }
@@ -113,19 +113,19 @@ todoList.addEventListener('click', (e) => {
 
 
 function displayItemsOnCurrentPage() {
-   todoList.textContent = "";
-  if (document.currentPage === "inboxPage"){
+  todoList.textContent = "";
+  if (document.currentPage === "inboxPage") {
     pageTitle.textContent = "Inbox";
     showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
   }
-    
-  else if (document.currentPage === "todayPage"){
-        pageTitle.textContent = "Today Tasks";
+
+  else if (document.currentPage === "todayPage") {
+    pageTitle.textContent = "Today Tasks";
     showTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
   }
 
-  else if (document.currentPage === "upcomingPage"){
-        pageTitle.textContent = "Upcoming Tasks";
+  else if (document.currentPage === "upcomingPage") {
+    pageTitle.textContent = "Upcoming Tasks";
     showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
   }
 

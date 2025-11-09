@@ -78,8 +78,16 @@ formSubmit.addEventListener("click", (e) => {
     })
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    console.log("pro-id is: " + projects[projectIndex]);
     projects[projectIndex].filterTasks(tasks, projects[projectIndex].id);
     showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+    console.log(document.currentPage);
+    document.currentPage = "inbox";
+    console.log(document.currentPage);
+
+
+
 
     dialogElem.close();
   }

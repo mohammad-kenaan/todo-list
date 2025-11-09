@@ -29,6 +29,7 @@ function projectCanDo() {
 }
 
 function filterTasks(tasks, id) {
+
   return tasks.filter(task => task.projectId == id);
 }
 
