@@ -124,11 +124,13 @@ function showPageContent(title) {
       break;
 
     case "Today Tasks":
-      showTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      showArchiveTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+
       break;
 
     case "Upcomming Tasks":
-      showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      showArchiveTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+
       break;
 
     default:

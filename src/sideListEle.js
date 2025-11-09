@@ -7,6 +7,7 @@ export function createSideListEle(item, type) {
   if(type === "task") 
       ele.classList.add("side-item-task");
   const hashCharachter = document.createElement("i");
+  hashCharachter.textContent = item.id;
   hashCharachter.classList.add("fa-solid", "fa-hashtag");
   const eleName = document.createElement("span");
   eleName.classList.add("done-task-name");

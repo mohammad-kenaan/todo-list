@@ -98,14 +98,10 @@ todoList.addEventListener('click', (e) => {
         }
       }
       else {
-        if (document.currentPage === "archivePage" ||
-          document.currentPage === "doneTasksPage" ||
-          document.currentPage === "taskFromSide") return;
-        else {
+        if (document.currentPage === "inboxPage") {
           Controller.unExpandItems();
           Controller.expandItem(clickedTodoItem);
         }
-
       }
     }
   }

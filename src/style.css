@@ -117,16 +117,17 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 16px;
 
   h1 {
-    font-size: 3rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin-right: 30px;
    
   }
 
   button {
-    width: 250px;
+    width: 170px;
   }
 }
 

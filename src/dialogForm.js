@@ -82,11 +82,8 @@ formSubmit.addEventListener("click", (e) => {
     console.log("pro-id is: " + projects[projectIndex]);
     projects[projectIndex].filterTasks(tasks, projects[projectIndex].id);
     showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-    console.log(document.currentPage);
     document.currentPage = "inbox";
-    console.log(document.currentPage);
-
-
+      pageTitle.textContent = "Inbox";
 
 
     dialogElem.close();

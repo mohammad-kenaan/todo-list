@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Controller.showWarning("An item has been deleted recently. Please check your list")
       }
       else {
-        pageTitle.textContent = tasks[itemIndexInTasks].title;
+        pageTitle.textContent = "Past tasks";
         const todoEle = createSummaryEle(tasks[itemIndexInTasks]);
         todoListEle.append(todoEle);
       }
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Controller.showWarning("An item has been deleted recently. Please check your list")
       }
       else {
-        pageTitle.textContent = tasks[itemIndexInTasks].title;
+        pageTitle.textContent = "Past tasks";
         const todoEle = createSummaryEle(tasks[itemIndexInTasks]);
         todoListEle.append(todoEle);
       }

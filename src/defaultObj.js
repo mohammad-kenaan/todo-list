@@ -9,11 +9,13 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   console.log("storage Empty");
 }
 
-//createDefaultObjs();
+createDefaultObjs();
 
 function createDefaultObjs() {
   const tasks = [];
   const projects = [];
+  localStorage.setItem("taskIdCounter", JSON.stringify(0));
+  localStorage.setItem("projectIdCounter", JSON.stringify(0));
 
   let task1 = createTask(
     "Task Title: Create Home Page",
@@ -211,5 +213,6 @@ function createDefaultObjs() {
   localStorage.setItem("projects", JSON.stringify(projects));
   localStorage.setItem("archive", JSON.stringify(archive));
   localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+
 }
 
