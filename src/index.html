@@ -19,7 +19,7 @@
           </picture>
           <h2 class="user-name">Morgan</h2>
         </div>
-        <div class="my-projects">
+        <div class="dashboard my-projects">
 
           <button class="add-project">Add Project</button>
 
@@ -53,21 +53,19 @@
           </ul>
           <h1 class="fav-tasks">Archive</h1>
           <ul class="fav-tasks-container">
-
           </ul>
 
+          <div class="my-list-projects my-projects">
+            <h1>My Projects</h1>
+            <ul class="progects-list">
+            </ul>
+          </div>
 
-        </div>
-        <div class="my-list-projects my-projects">
-          <h1>My Projects</h1>
-          <ul class="progects-list">
+          <div class="done-tasks">
+            <h1>Done Tasks</h1>
+            <ul class="list-done-tasks"></ul>
+          </div>
 
-          </ul>
-        </div>
-
-        <div class="done-tasks">
-          <h1>Done Tasks</h1>
-          <ul class="list-done-tasks"></ul>
         </div>
 
       </div>
@@ -76,12 +74,10 @@
     <div class="menu">
       <div class="container" id="menu-container">
         <div class="menu-header">
-          <h1 class="page-title">Hello, let's get started.</h1>
+          <h1 class="page-title">Hello, let's get started</h1>
           <button class="menu-add-task">Add task</button>
         </div>
-
         <div class="todo-list">
-
         </div>
 
       </div>
@@ -95,7 +91,7 @@
         <div class="dialog-form-container">
 
           <p> <label for="title">Title</label> </p>
-          <p> <input type="text" name="title" id="title" required> </p>
+          <p> <input type="text" name="title" id="title"> </p>
 
           <p> <label for="priority">Priority</label> </p>
           <p> <input type="number" name="priority" id="priority" value="3"> </p>
@@ -130,12 +126,12 @@
         <legend>Project Details</legend>
         <div class="dialog-form-container">
           <p> <label for="title-project">Title</label> </p>
-          <p> <input type="text" name="title-project" id="title-project" required placeholder="My Project"> </p>
+          <p> <input type="text" name="title-project" id="title-project"  placeholder="My Project"> </p>
         </div>
         <fieldset id="textarea-project">
           <legend>Description</legend>
           <textarea name="description-project" id="description-project"
-            placeholder="Let's write a description here"></textarea>
+            placeholder="Let's write a description here" ></textarea>
         </fieldset>
       </fieldset>
       <div class="dialog-card-info">
@@ -145,9 +141,9 @@
     </form>
   </dialog>
 
-  <div class="warning-message" >
-      <h1 id="title-warning-message">Warning</h1>
-      <button class ="warning-close-btn">Close</button>
+  <div class="warning-message">
+    <h1 id="title-warning-message">Warning</h1>
+    <button class="warning-close-btn">Close</button>
   </div>
 
 

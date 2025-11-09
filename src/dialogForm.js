@@ -8,6 +8,10 @@ const dialogElem = document.getElementById("dialog");
 const formSubmit = document.querySelector("#confirmBtn");
 const cancelProcess = document.querySelector("#cancel");
 const form = document.getElementById('my-form');
+const taskTitleInp = document.getElementById('title');
+const taskTextareaInp = document.getElementById('textarea');
+
+
 const openDialog = document.querySelector('.menu-add-task');
 const todoList = document.querySelector('.todo-list');
 
@@ -35,6 +39,8 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
 openDialog.addEventListener("click", () => {
   showSelecteOption(JSON.parse(localStorage.getItem("projects")));
   dialogElem.showModal();
+  taskTitleInp.classList.remove("required-inputs");
+  taskTextareaInp.classList.remove("required-inputs");
   form.reset();
 });
 
@@ -52,7 +58,7 @@ formSubmit.addEventListener("click", (e) => {
   const projectSelected = document.querySelector("#project-id").
     value.match(/\d+/)[0] || 100;
 
-  if (title !== "" && projectSelected !== "") {
+  if (title.trim() !== "" && description.trim() !== "") {
     const task =
       createTask(
         title,
@@ -77,5 +83,16 @@ formSubmit.addEventListener("click", (e) => {
 
     dialogElem.close();
   }
+  else {
+    taskTitleInp.classList.add("required-inputs");
+    taskTextareaInp.classList.add("required-inputs");
+
+    setTimeout(() => {
+      taskTitleInp.classList.remove("required-inputs");
+      taskTextareaInp.classList.remove("required-inputs");
+    }, 3000);
+  }
 
 })
+
+

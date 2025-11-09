@@ -1,4 +1,4 @@
-export function createArchiveEle(task) {
+export function createSummaryEle(task) {
   const todoItem = createEle("div", "todo-item");
   todoItem.dataset.id = task.id;
   todoItem.dataset.eleType = "task";
@@ -7,7 +7,6 @@ export function createArchiveEle(task) {
   const projectIdContainer = createEle("div", "project-head");
   const projectId = createEle("h4", "project-head");
   projectId.textContent = "From Project: #" + task.belongTo;
-
 
   // ----------- Head
   const head = createEle("h1", "head");
@@ -45,11 +44,6 @@ export function createArchiveEle(task) {
   todoBtnDelete.textContent = "Delete";
   todoBtnDelete.type = "button";
   todoBtnDelete.dataset.btnType = "delete";
-
-
-
-
-
 
   // ---------- apend child to dom
   projectIdContainer.append(projectId)

@@ -1,19 +1,20 @@
-import { createTodoEle } from "./todoEle.js";
-import { createArchiveEle } from "./archiveEle.js";
+import { createDetailedEle } from "./todoEle.js";
+import { createSummaryEle } from "./archiveEle.js";
 import { createSideListEle } from "./sideListEle.js";
 import { createProjectEle } from "./projectEle.js";
 
 export function showTasksEle(tasksOfObj, HtmlEle) {
   tasksOfObj.forEach((task) => {
-    const todoEle = createTodoEle(task);
+    const todoEle = createDetailedEle(task);
     HtmlEle.append(todoEle);
   });
 }
 
 export function showArchiveTasksEle(tasksOfObj, HtmlEle) {
+  const HtmlEle2 = document.querySelector('.todo-list');
   tasksOfObj.forEach((task) => {
-    const todoEle = createArchiveEle(task);
-    HtmlEle.append(todoEle);
+    const todoEle = createSummaryEle(task);
+    HtmlEle2.append(todoEle);
   });
 }
 

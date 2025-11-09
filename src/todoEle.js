@@ -1,4 +1,4 @@
-export function createTodoEle(task) {
+export function createDetailedEle(task) {
   const todoItem = createEle("div", "todo-item");
   todoItem.dataset.id = task.id;
   todoItem.dataset.eleType = "task";
@@ -32,8 +32,10 @@ export function createTodoEle(task) {
     minute: "2-digit",
     hour12: true,
   }
+   
+
   const date = new Date(task.dueDate);
-  let dateFormated = date.toLocaleString("en-CA", format)
+  let dateFormated = date.toLocaleDateString("en-CA", { timeZone: "UTC" });;
 
   const dueDateP = createEle("p", "due-date-p");
   dueDateP.textContent = dateFormated;

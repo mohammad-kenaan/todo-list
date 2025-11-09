@@ -8,6 +8,8 @@ const cancelProcess = document.querySelector("#cancel-project");
 const form = document.getElementById('my-form-project');
 const projectsElement = document.querySelector('.progects-list');
 const todoList = document.querySelector('.todo-list');
+const projectTitleInp = document.getElementById('title-project');
+const projectTextareaInp = document.getElementById('textarea-project');
 let projects;
 
 openDialog.addEventListener("click", () => {
@@ -26,8 +28,6 @@ formSubmit.addEventListener("click", (e) => {
 
   const title = document.getElementById('title-project').value;
   const description = document.getElementById('description-project').value;
-  document.getElementById('title-project').setAttribute("required", "");
-  document.getElementById('description-project').setAttribute("required", "");
 
   if (title != "" && description != "") {
     const project =
@@ -54,4 +54,15 @@ formSubmit.addEventListener("click", (e) => {
 
     dialogElem.close();
   }
+
+  else {
+    projectTitleInp.classList.add("required-inputs");
+    projectTextareaInp.classList.add("required-inputs");
+
+    setTimeout(() => {
+      projectTitleInp.classList.remove("required-inputs");
+      projectTextareaInp.classList.remove("required-inputs");
+    }, 3000);
+  }
 })
+

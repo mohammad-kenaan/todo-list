@@ -59,8 +59,6 @@ function deletetask(arr, id) {
 }
 
 function updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp) {
-  const pageTitle = document.querySelector(".page-title");
-  pageTitle.textContent = "Inbox";
   const task = tasks[clickedTodoItemIndex];
   task.title = titleInp || task.title,
     task.dueDate = dueDateInp || task.dueDate,

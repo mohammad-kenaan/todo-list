@@ -9,9 +9,7 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   console.log("storage Empty");
 }
 
-
 //createDefaultObjs();
-
 
 function createDefaultObjs() {
   const tasks = [];
@@ -213,6 +211,5 @@ function createDefaultObjs() {
   localStorage.setItem("projects", JSON.stringify(projects));
   localStorage.setItem("archive", JSON.stringify(archive));
   localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
-
 }
 

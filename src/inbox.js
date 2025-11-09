@@ -36,7 +36,6 @@ todoList.addEventListener('click', (e) => {
       const clickedTodoItemIndex = Controller.getElementIndex(tasks, clickedTodoItemId);
 
       if (e.target.nodeName === "BUTTON") {
-
         const btnType = e.target.dataset.btnType;
         switch (btnType) {
           case "delete": {
@@ -45,9 +44,7 @@ todoList.addEventListener('click', (e) => {
             }
             else {
               tasks[clickedTodoItemIndex].deletetask(tasks, clickedTodoItemId);
-              todoList.textContent = "";
               localStorage.setItem("tasks", JSON.stringify(tasks));
-
               displayItemsOnCurrentPage();
             }
             break;
@@ -60,14 +57,12 @@ todoList.addEventListener('click', (e) => {
               (".todo-input-title").value;
             const dueDateInp = expandedTask.querySelector
               (".todo-input-due-date").value;
+
             const priorityInp = expandedTask.querySelector(".todo-input-priority").value;
             const descriptionInp = expandedTask.querySelector(".todo-input-description-textarea").value;
 
             tasks[clickedTodoItemIndex].updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp);
-            Controller.unExpandItems();
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-            todoList.textContent = "";
-
+            Controller.unExpandItems();            
             displayItemsOnCurrentPage();
 
             break;
@@ -102,7 +97,6 @@ todoList.addEventListener('click', (e) => {
           showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
         }
       }
-
       else {
         if (document.currentPage === "inboxPage" ||
           document.currentPage === "todayPage" ||
@@ -113,17 +107,13 @@ todoList.addEventListener('click', (e) => {
         }
 
       }
-
     }
   }
 })
 
 
-
-
-
 function displayItemsOnCurrentPage() {
-  console.log(document.currentPage);
+   todoList.textContent = "";
   if (document.currentPage === "inboxPage"){
     pageTitle.textContent = "Inbox";
     showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);

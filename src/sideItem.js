@@ -1,6 +1,5 @@
 import { appControllerCanDo } from "./features.js";
-import { createTodoEle } from "./todoEle.js";
-import { createArchiveEle } from "./archiveEle.js";
+import { createSummaryEle } from "./archiveEle.js";
 import { createProjectEle } from "./projectEle.js";
 import { createProject } from "./project.js";
 
@@ -49,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       else {
         pageTitle.textContent = tasks[itemIndexInTasks].title;
-        const todoEle = createArchiveEle(tasks[itemIndexInTasks]);
+        const todoEle = createSummaryEle(tasks[itemIndexInTasks]);
         Controller.unExpandItems(todoEle);
         todoListEle.append(todoEle);
       }
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       else {
         pageTitle.textContent = tasks[itemIndexInTasks].title;
-        const todoEle = createArchiveEle(tasks[itemIndexInTasks]);
+        const todoEle = createSummaryEle(tasks[itemIndexInTasks]);
         Controller.unExpandItems(todoEle);
         todoListEle.append(todoEle);
       }

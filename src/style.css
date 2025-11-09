@@ -50,12 +50,12 @@ body {
 
 }
 
-.sidebar .container .my-projects {
+.sidebar .container .dashboard {
   margin: 40px 0;
 
 }
 
-.sidebar .container .my-projects .add-project,
+.sidebar .container .dashboard .add-project,
 .menu .menu-header button {
   padding: 0.8rem 3rem;
   background-color: var(--color-button-red);
@@ -102,14 +102,12 @@ body {
 }
 
 .menu .container {
-
   min-width: 400px;
   min-height: 100%;
   border-top: 3px solid var(--color-border-card);
   border-right: 3px solid var(--color-border-card);
   box-shadow: 3px 3px 20px;
   padding: 40px;
-
 }
 
 .menu .menu-header {
@@ -124,6 +122,11 @@ body {
     font-size: 3rem;
     font-weight: 600;
     margin-right: 30px;
+   
+  }
+
+  button {
+    width: 250px;
   }
 }
 
@@ -378,6 +381,11 @@ dialog form {
     padding: 20px 50px;
     border: 1px solid gray;
     text-align: start;
+
+    legend {
+      font-weight: 600;
+      padding: 10px;
+    }
   }
 }
 
@@ -456,9 +464,7 @@ dialog form .dialog-card-content {
     padding: 5px;
     flex-grow: 1;
 
-    legend {
-      font-weight: 600;
-    }
+
 
     textarea {
       height: 100%;
@@ -492,7 +498,7 @@ dialog form .dialog-card-info {
 
 .warning-message {
   display: none;
-  z-index: 999;
+  z-index: 9999999;
   position: fixed;
   top: 20%;
   right: 40%;
@@ -500,7 +506,7 @@ dialog form .dialog-card-info {
   color: var(--color-btn-text);
   border-radius: 5px;
   font-size: 1.2rem;
-  width: 350px;
+  width: 450px;
   height: 120px;
 
 }
@@ -527,4 +533,10 @@ dialog form .dialog-card-info {
 
 .warning-message-show {
   display: block;
+}
+
+.required-inputs {
+  border: 1px solid red;
+  outline: none;
+  transition: border 0.5s ease;
 }

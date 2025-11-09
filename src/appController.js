@@ -3,7 +3,8 @@ import "./dialogForm.js";
 import "./dialogFromProject.js";
 import "./inbox.js";
 import "./sideItem.js";
-import { showTasksEle, showSideItems, showArchiveTasksEle } from "./itemsDisplay.js";
+import { showTasksEle, showSideItems, showArchiveTasksEle }
+  from "./itemsDisplay.js";
 import { showProjectsEle } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 import { getTodayTasks } from "./today.js";
@@ -12,7 +13,6 @@ import { createTask } from "./task.js";
 import { createProject } from "./project.js";
 
 document.currentPage = "homePage";
-
 
 const Controller = appControllerCanDo();
 const doneTaskListEle = document.querySelector('.list-done-tasks');
@@ -32,6 +32,7 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
     task.id,
     true
   )) || [];
+
 const projects = JSON.parse(localStorage.getItem("projects")).map(project =>
   createProject(
     project.name,
@@ -50,71 +51,87 @@ const myProjectBtn = document.querySelector("#btn-projects");
 const archiveBtn = document.querySelector("#btn-archive");
 const doneTasksBtn = document.querySelector("#btn-done-tasks");
 const pageTitle = document.querySelector(".page-title");
+const dashboard = document.querySelector(".dashpoard-list");
 
 showSideItems(projects, projectsElement, "project");
 showSideItems(archiveTasks, favTasksElement, "task");
 showSideItems(doneTasks, doneTaskListEle, "task");
 
-inboxBtn.addEventListener("click", () => {
-  document.currentPage = "inboxPage";
-  pageTitle.textContent = "Inbox";
-  todoList.textContent = "";
-  favTasksElement.textContent = "";
-  doneTaskListEle.textContent = "";
-  Controller.filterDoneTasks(tasks);
-  showSideItems(JSON.parse(localStorage.getItem("doneTasks")),
-    doneTaskListEle, "task");
-  showSideItems(JSON.parse(localStorage.getItem("archive")),
-    favTasksElement, "task");
-  showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-})
 
-myProjectBtn.addEventListener("click", () => {
-  document.currentPage = "myProjectsPage";
-  pageTitle.textContent = "My Projects";
-  todoList.textContent = "";
-  for (let i = 0; i < projects.length; i++) {
-    projects[i].filterTasks(tasks, projects[i].id);
+dashboard.addEventListener("click", (e) => {
+  const clickedItem = e.target;
+  if (!clickedItem || clickedItem === null) return;
+
+  else {
+    if (clickedItem.id === "btn-projects") {
+      document.currentPage = "myProjectsPage";
+      showPageContent("My Projects");
+    }
+    else if (clickedItem.id === "btn-inbox") {
+      document.currentPage = "inboxPage";
+      showPageContent("Inbox");
+    }
+    else if (clickedItem.id === "btn-archive") {
+      document.currentPage = "archivePage";
+      showPageContent("Archive");
+    }
+    else if (clickedItem.id === "btn-done-tasks") {
+      document.currentPage = "doneTasksPage";
+      showPageContent("Done Tasks");
+    }
+    else if (clickedItem.id === "btn-today") {
+      document.currentPage = "todayPage";
+      showPageContent("Today Tasks");
+    }
+    else if (clickedItem.id === "btn-upcomming") {
+      document.currentPage = "upcomingPage";
+      showPageContent("Upcomming Tasks");
+    }
   }
-  showProjectsEle(projects, todoList);
+
 })
-
-archiveBtn.addEventListener("click", () => {
-  document.currentPage = "archivePage";
-  pageTitle.textContent = "Archive";
-  favTasksElement.textContent = "";
-  todoList.textContent = "";
-  showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
-  showArchiveTasksEle(JSON.parse(localStorage.getItem("archive")), todoList)
-})
-
-doneTasksBtn.addEventListener("click", () => {
-  document.currentPage = "doneTasksPage";
-  pageTitle.textContent = "Done Tasks";
-  doneTaskListEle.textContent = "";
-  todoList.textContent = "";
-  showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");    showArchiveTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList)
-})
-
-btnToday.addEventListener("click", () => {
-  document.currentPage = "todayPage";
-  pageTitle.textContent = "Today Tasks";
-  todoList.textContent = "";
-  showTasksEle(getTodayTasks(tasks), todoList)
-})
-
-upcoming.addEventListener("click", () => {
-  document.currentPage = "upcomingPage";
-  pageTitle.textContent = "Upcomming Tasks";
-  todoList.textContent = "";
-  showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList)
-})
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
-const warningCloseBtn = document.querySelector('.warning-close-btn');
-warningCloseBtn.addEventListener("click", () => {
-  Controller.closeWarning()
-})
+  const warningCloseBtn = document.querySelector('.warning-close-btn');
+  warningCloseBtn.addEventListener("click", () => {
+    Controller.closeWarning()
+  })
 });
+
+
+function showPageContent(title) {
+  pageTitle.textContent = title;
+  todoList.textContent = "";
+
+  switch (title) {
+    case "My Projects":
+      for (let i = 0; i < projects.length; i++) {
+        projects[i].filterTasks(tasks, projects[i].id);
+      }
+      showProjectsEle(projects, todoList);
+      break;
+
+    case "Done Tasks":
+      showArchiveTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList);
+      break;
+
+    case "Archive":
+      showArchiveTasksEle(JSON.parse(localStorage.getItem("archive")), todoList);
+      break;
+
+    case "Inbox":
+      showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+      break;
+
+    case "Today Tasks":
+      showTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      break;
+
+    case "Upcomming Tasks":
+      showTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      break;
+
+    default:
+      showTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+  }
+}
