@@ -1,15 +1,12 @@
 import { showTasksEle, showSideItems } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 import { createTask } from "./task.js";
-import { getTodayTasks } from "./today.js";
-import { getUpcomingTasks } from "./upcomingTasks.js";
+
 
 const Controller = appControllerCanDo();
-const todoList = document.querySelector('.todo-list');
 const todoDashboardList = document.querySelector('.todo-dashboard-list');
 const doneTaskListEle = document.querySelector('.list-done-tasks');
 const favTasksElement = document.querySelector('.fav-tasks-container');
-const pageTitle = document.querySelector(".page-title");
 
 
 todoDashboardList.addEventListener('click', (e) => {

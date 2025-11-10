@@ -32,14 +32,12 @@ export function createTask(
 
 const Controller = appControllerCanDo();
 
-
 function taskCanDo() {
   return {
     isTaskChecked,
     deletetask,
     updateTask,
     filterProjects,
-
   }
 }
 

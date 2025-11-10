@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const element = e.target;
       const elementId = element.dataset.parentId;
       todoList.textContent = "";
-      todoDashboardList.textContent = "";         let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
+      todoDashboardList.textContent = "";         
+      let itemIndexInTasks = Controller.getElementIndex(tasks, elementId);
 
       if (itemIndexInTasks === -1) {
         Controller.showWarning("An item has been deleted recently. Please check your list")

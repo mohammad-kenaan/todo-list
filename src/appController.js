@@ -44,14 +44,8 @@ const projects = JSON.parse(localStorage.getItem("projects")).map(project =>
 
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
-const btnToday = document.querySelector("#btn-today");
-const upcoming = document.querySelector("#btn-upcomming");
 const todoList = document.querySelector('.todo-list');
 const todoDashboardList = document.querySelector('.todo-dashboard-list');
-const inboxBtn = document.querySelector("#btn-inbox");
-const myProjectBtn = document.querySelector("#btn-projects");
-const archiveBtn = document.querySelector("#btn-archive");
-const doneTasksBtn = document.querySelector("#btn-done-tasks");
 const pageTitle = document.querySelector(".page-title");
 const dashboard = document.querySelector(".dashpoard-list");
 

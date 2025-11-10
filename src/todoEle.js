@@ -8,7 +8,6 @@ export function createDetailedEle(task) {
   const projectId = createEle("h4", "project-head");
   projectId.textContent = "From Project: #" + task.belongTo;
 
-
   // ----------- Head
   const head = createEle("h1", "head");
   head.textContent = task.title;
@@ -32,7 +31,6 @@ export function createDetailedEle(task) {
     minute: "2-digit",
     hour12: true,
   }
-   
 
   const date = new Date(task.dueDate);
   let dateFormated = date.toLocaleDateString("en-CA", { timeZone: "UTC" });;
@@ -139,9 +137,6 @@ export function createDetailedEle(task) {
   fieldset.append(legend, todoDetails, todoInputs, todoInputDescription)
   form.append(fieldset, todoBtnsDetails);
   hiddenDetailsContainer.append(form);
-
-
-  
   todoItem.append(projectIdContainer, head, mainDescripton, dueDate,
     checkBoxContainer, hiddenDetailsContainer);
   return todoItem;
