@@ -4,7 +4,7 @@ export function createTask(
   title,
   description = "Please add a task description",
   priority = 3,
-  dueDate = new Date(),
+  dueDate,
   projectId = 4,
   personId = 1,
   isChecked = false,
@@ -59,6 +59,7 @@ function deletetask(arr, id) {
 }
 
 function updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp) {
+
   const task = tasks[clickedTodoItemIndex];
   task.title = titleInp || task.title,
     task.dueDate = dueDateInp || task.dueDate,

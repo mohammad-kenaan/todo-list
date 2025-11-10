@@ -1,8 +1,9 @@
 import "./defaultObj.js";
 import "./dialogForm.js";
 import "./dialogFromProject.js";
-import "./inbox.js";
+import "./todoDashboard.js";
 import "./sideItem.js";
+import { getOverdueTasks } from "./missingTasks.js";
 import { showTasksEle, showSideItems, showArchiveTasksEle }
   from "./itemsDisplay.js";
 import { showProjectsEle } from "./itemsDisplay.js";
@@ -46,6 +47,7 @@ const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
 const btnToday = document.querySelector("#btn-today");
 const upcoming = document.querySelector("#btn-upcomming");
 const todoList = document.querySelector('.todo-list');
+const todoDashboardList = document.querySelector('.todo-dashboard-list');
 const inboxBtn = document.querySelector("#btn-inbox");
 const myProjectBtn = document.querySelector("#btn-projects");
 const archiveBtn = document.querySelector("#btn-archive");
@@ -67,9 +69,18 @@ dashboard.addEventListener("click", (e) => {
       document.currentPage = "myProjectsPage";
       showPageContent("My Projects");
     }
+    else if (clickedItem.id === "btn-to-do-dashboard") {
+
+      document.currentPage = "todoDashboard";
+      showPageContent("Dashboard");
+    }
     else if (clickedItem.id === "btn-inbox") {
       document.currentPage = "inboxPage";
       showPageContent("Inbox");
+    }
+    else if (clickedItem.id === "btn-missing") {
+      document.currentPage = "MissingPage";
+      showPageContent("Missing");
     }
     else if (clickedItem.id === "btn-archive") {
       document.currentPage = "archivePage";
@@ -105,6 +116,8 @@ function showPageContent(title) {
 
   switch (title) {
     case "My Projects":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
       for (let i = 0; i < projects.length; i++) {
         projects[i].filterTasks(tasks, projects[i].id);
       }
@@ -112,28 +125,53 @@ function showPageContent(title) {
       break;
 
     case "Done Tasks":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
       showArchiveTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList);
       break;
 
+    case "Dashboard":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
+
+      showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoDashboardList);
+      break;
+
     case "Archive":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
       showArchiveTasksEle(JSON.parse(localStorage.getItem("archive")), todoList);
       break;
 
     case "Inbox":
-      showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
+      showArchiveTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+      break;
+
+    case "Missing":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
+      showArchiveTasksEle(getOverdueTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
       break;
 
     case "Today Tasks":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
       showArchiveTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
 
       break;
 
     case "Upcomming Tasks":
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
       showArchiveTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
 
       break;
 
     default:
-      showTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      todoDashboardList.textContent = "";
+      todoList.textContent = "";
+      showArchiveTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
   }
 }

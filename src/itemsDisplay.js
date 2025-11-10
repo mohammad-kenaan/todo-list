@@ -15,6 +15,7 @@ export function showArchiveTasksEle(tasksOfObj, HtmlEle) {
   tasksOfObj.forEach((task) => {
     const todoEle = createSummaryEle(task);
     HtmlEle2.append(todoEle);
+
   });
 }
 

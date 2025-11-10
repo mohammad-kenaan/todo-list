@@ -10,10 +10,13 @@ const cancelProcess = document.querySelector("#cancel");
 const form = document.getElementById('my-form');
 const taskTitleInp = document.getElementById('title');
 const taskTextareaInp = document.getElementById('textarea');
+const pageTitle = document.querySelector(".page-title");
+
 
 
 const openDialog = document.querySelector('.menu-add-task');
 const todoList = document.querySelector('.todo-list');
+const todoDashboardList = document.querySelector('.todo-dashboard-list');
 
 const projects = JSON.parse(localStorage.getItem("projects")).map(project =>
   createProject(
@@ -54,7 +57,7 @@ formSubmit.addEventListener("click", (e) => {
   const title = document.getElementById('title').value;
   const description = document.getElementById('description').value;
   const priority = document.getElementById('priority').value;
-  const douDate = document.getElementById('due-date').value;
+  const douDate = document.getElementById('due-date').value || new Date();
   const projectSelected = document.querySelector("#project-id").
     value.match(/\d+/)[0] || 100;
 
@@ -67,8 +70,9 @@ formSubmit.addEventListener("click", (e) => {
         douDate,
         projectSelected);
     task.belongTo = projectSelected;
-
+console.log("Task length was : " + tasks.length);
     tasks.unshift(task);
+console.log("Task length is : " + tasks.length);
 
     const filterProjectsArray = task.filterProjects(projects, projectSelected);
     let projectIndex;
@@ -77,14 +81,17 @@ formSubmit.addEventListener("click", (e) => {
       projects[projectIndex].tasksList.unshift(task);
     })
 
+
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    console.log("pro-id is: " + projects[projectIndex]);
     projects[projectIndex].filterTasks(tasks, projects[projectIndex].id);
-    showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
-    document.currentPage = "inbox";
-      pageTitle.textContent = "Inbox";
 
+    todoDashboardList.textContent = "";
+    todoList.textContent = "";
+
+    showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+    document.currentPage = "inboxPage";
+    pageTitle.textContent = "Inbox";
 
     dialogElem.close();
   }

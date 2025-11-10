@@ -30,6 +30,10 @@
               <button id="btn-projects">My Projects</button>
             </li>
             <li>
+              <i class="fa-solid fa-grip"></i>
+              <button id="btn-to-do-dashboard" data-editable="true">To-Do Dashboard</button>
+            </li>
+            <li>
               <i class="fa-solid fa-box-archive"></i>
               <button id="btn-archive">Archive</button>
             </li>
@@ -50,6 +54,12 @@
               <i class="fa-solid fa-calendar-days"></i>
               <button id="btn-upcomming">Upcomming</button>
             </li>
+
+            <li>
+            <i class="fa-regular fa-comment"></i>
+              <button id="btn-missing">Missing</button>
+            </li>
+
           </ul>
           <h1 class="fav-tasks">Archive</h1>
           <ul class="fav-tasks-container">
@@ -77,7 +87,10 @@
           <h1 class="page-title">Hello, let's get started</h1>
           <button class="menu-add-task">Add task</button>
         </div>
+
+        <div class="todo-dashboard-list" data-editable="true"></div>
         <div class="todo-list">
+
         </div>
 
       </div>
@@ -126,12 +139,12 @@
         <legend>Project Details</legend>
         <div class="dialog-form-container">
           <p> <label for="title-project">Title</label> </p>
-          <p> <input type="text" name="title-project" id="title-project"  placeholder="My Project"> </p>
+          <p> <input type="text" name="title-project" id="title-project" placeholder="My Project"> </p>
         </div>
         <fieldset id="textarea-project">
           <legend>Description</legend>
           <textarea name="description-project" id="description-project"
-            placeholder="Let's write a description here" ></textarea>
+            placeholder="Let's write a description here"></textarea>
         </fieldset>
       </fieldset>
       <div class="dialog-card-info">

@@ -140,6 +140,8 @@ export function createDetailedEle(task) {
   form.append(fieldset, todoBtnsDetails);
   hiddenDetailsContainer.append(form);
 
+
+  
   todoItem.append(projectIdContainer, head, mainDescripton, dueDate,
     checkBoxContainer, hiddenDetailsContainer);
   return todoItem;
