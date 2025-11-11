@@ -1,9 +1,28 @@
 import { createTask } from "./task.js";
 import { appControllerCanDo } from "./features.js";
-import { showTasksEle, showSelecteOption } from "./itemsDisplay.js";
+import { displaycontroller } from "./itemsDisplay.js";
 import { createProject } from "./project.js";
 
 const Controller = appControllerCanDo();
+const ProjectController = createProject(
+  "Master Project",
+  "This project has been created to give you access to Project.js file content",
+  9999,
+  true
+);
+const TaskController = createTask(
+  "Master Task",
+  "This Task has been created to give you access to task.js file content",
+  2,
+  new Date().toISOString(),
+  9999,
+  0,
+  false,
+  55555,
+  true
+);
+const DisplayController = displaycontroller();
+
 const dialogElem = document.getElementById("dialog");
 const formSubmit = document.querySelector("#confirmBtn");
 const cancelProcess = document.querySelector("#cancel");
@@ -11,8 +30,6 @@ const form = document.getElementById('my-form');
 const taskTitleInp = document.getElementById('title');
 const taskTextareaInp = document.getElementById('textarea');
 const pageTitle = document.querySelector(".page-title");
-
-
 
 const openDialog = document.querySelector('.menu-add-task');
 const todoList = document.querySelector('.todo-list');
@@ -40,7 +57,7 @@ const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
   )) || [];
 
 openDialog.addEventListener("click", () => {
-  showSelecteOption(JSON.parse(localStorage.getItem("projects")));
+  DisplayController.showSelecteOption(JSON.parse(localStorage.getItem("projects")));
   dialogElem.showModal();
   taskTitleInp.classList.remove("required-inputs");
   taskTextareaInp.classList.remove("required-inputs");
@@ -58,7 +75,7 @@ formSubmit.addEventListener("click", (e) => {
   const description = document.getElementById('description').value;
   const priority = document.getElementById('priority').value;
   const douDate = document.getElementById('due-date').value || new Date();
-  const projectSelected = document.querySelector("#project-id").
+  const projectSelected = +document.querySelector("#project-id").
     value.match(/\d+/)[0] || 100;
 
   if (title.trim() !== "" && description.trim() !== "") {
@@ -69,27 +86,31 @@ formSubmit.addEventListener("click", (e) => {
         priority,
         douDate,
         projectSelected);
-    task.belongTo = projectSelected;
-console.log("Task length was : " + tasks.length);
-    tasks.unshift(task);
-console.log("Task length is : " + tasks.length);
 
-    const filterProjectsArray = task.filterProjects(projects, projectSelected);
+    task.belongTo = document.querySelector("#project-id").
+      value.match(/\D+/g)[1] || "General";
+
+    tasks.unshift(task);
+
+    const filterProjectsArray = TaskController.filterProjects(
+      JSON.parse(localStorage.getItem("projects")), projectSelected);
+
     let projectIndex;
     filterProjectsArray.map((project) => {
-      projectIndex = Controller.getElementIndex(projects, project.id);
-      projects[projectIndex].tasksList.unshift(task);
+      projectIndex = Controller.getElementIndex(
+        JSON.parse(localStorage.getItem("projects")), project.id);
+      JSON.parse(localStorage.getItem("projects"))[projectIndex].
+        tasksList.unshift(task);
     })
-
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
-    projects[projectIndex].filterTasks(tasks, projects[projectIndex].id);
+    ProjectController.filterTasks(tasks, JSON.parse(localStorage.getItem("projects"))[projectIndex].id);
 
     todoDashboardList.textContent = "";
     todoList.textContent = "";
 
-    showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+    DisplayController.showArchiveTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
     document.currentPage = "inboxPage";
     pageTitle.textContent = "Inbox";
 

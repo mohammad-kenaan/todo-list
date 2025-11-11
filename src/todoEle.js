@@ -46,7 +46,6 @@ export function createDetailedEle(task) {
   checkbox.dataset.itemId = task.id;
   checkbox.id = task.id + "label";
   checkbox.checked = task.isChecked;
-  // console.log("checbox is checked" + task.isChecked);
   const checkboxLabel = createEle("label", "checkbox-label", "is-done");
   checkboxLabel.htmlFor = checkbox.id
 

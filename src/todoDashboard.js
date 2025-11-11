@@ -1,15 +1,26 @@
-import { showTasksEle, showSideItems } from "./itemsDisplay.js";
+import { displaycontroller } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 import { createTask } from "./task.js";
-import { getTodayTasks } from "./today.js";
-import { getUpcomingTasks } from "./upcomingTasks.js";
+
 
 const Controller = appControllerCanDo();
-const todoList = document.querySelector('.todo-list');
+const TaskController = createTask(
+  "Master Task",
+  "This Task has been created to give you access to task.js file content",
+  2,
+  new Date().toISOString(),
+  9999,
+  0,
+  false,
+  55555,
+  true
+);
+const DisplayController = displaycontroller();
+
+
 const todoDashboardList = document.querySelector('.todo-dashboard-list');
 const doneTaskListEle = document.querySelector('.list-done-tasks');
 const favTasksElement = document.querySelector('.fav-tasks-container');
-const pageTitle = document.querySelector(".page-title");
 
 
 todoDashboardList.addEventListener('click', (e) => {
@@ -44,10 +55,10 @@ todoDashboardList.addEventListener('click', (e) => {
               Controller.showWarning("An item has been deleted recently. Please check your list")
             }
             else {
-              tasks[clickedTodoItemIndex].deletetask(tasks, clickedTodoItemId);
+              TaskController.deletetask(tasks, clickedTodoItemId);
               localStorage.setItem("tasks", JSON.stringify(tasks));
               todoDashboardList.textContent = "";
-              showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoDashboardList);
+              DisplayController.showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoDashboardList);
             }
             break;
           }
@@ -64,10 +75,10 @@ todoDashboardList.addEventListener('click', (e) => {
             const descriptionInp = expandedTask.
               querySelector(".todo-input-description-textarea").value;
 
-            tasks[clickedTodoItemIndex].updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp);
+            TaskController.updateTask(tasks, clickedTodoItemIndex, titleInp, dueDateInp, priorityInp, descriptionInp);
 
             todoDashboardList.textContent = "";
-            showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoDashboardList);
+            DisplayController.showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoDashboardList);
             Controller.unExpandItems();
             break;
           }
@@ -75,7 +86,7 @@ todoDashboardList.addEventListener('click', (e) => {
           case "archive": {
             Controller.sendItem(tasks, archiveTasks, clickedTodoItemIndex, "archive");
             favTasksElement.textContent = "";
-            showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
+            DisplayController.showSideItems(JSON.parse(localStorage.getItem("archive")), favTasksElement, "task");
             Controller.unExpandItems();
             break;
           }
@@ -84,21 +95,21 @@ todoDashboardList.addEventListener('click', (e) => {
       }
       else if (e.target.nodeName === "INPUT" && e.target.type === "checkbox") {
         const checkbox = e.target;
-        if (tasks[clickedTodoItemIndex].isTaskChecked(checkbox) === true) {
+        if (TaskController.isTaskChecked(checkbox) === true) {
           tasks[clickedTodoItemIndex].isChecked = true;
           Controller.sendItem(tasks, doneTasks, clickedTodoItemIndex, "doneTasks");
           localStorage.setItem("tasks", JSON.stringify(tasks));
           localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
           doneTaskListEle.textContent = "";
-          showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
+          DisplayController.showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
 
         } else {
-          tasks[clickedTodoItemIndex].deletetask(doneTasks, clickedTodoItemId);
+          TaskController.deletetask(doneTasks, clickedTodoItemId);
           tasks[clickedTodoItemIndex].isChecked = false;
           localStorage.setItem("tasks", JSON.stringify(tasks));
           localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
           doneTaskListEle.textContent = "";
-          showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
+          DisplayController.showSideItems(JSON.parse(localStorage.getItem("doneTasks")), doneTaskListEle, "task");
         }
       }
       else {

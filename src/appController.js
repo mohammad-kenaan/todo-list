@@ -3,61 +3,40 @@ import "./dialogForm.js";
 import "./dialogFromProject.js";
 import "./todoDashboard.js";
 import "./sideItem.js";
+
 import { getOverdueTasks } from "./missingTasks.js";
-import { showTasksEle, showSideItems, showArchiveTasksEle }
-  from "./itemsDisplay.js";
-import { showProjectsEle } from "./itemsDisplay.js";
+import { displaycontroller } from "./itemsDisplay.js";
 import { appControllerCanDo } from "./features.js";
 import { getTodayTasks } from "./today.js";
 import { getUpcomingTasks } from "./upcomingTasks.js";
-import { createTask } from "./task.js";
 import { createProject } from "./project.js";
 
 document.currentPage = "homePage";
 
 const Controller = appControllerCanDo();
+const ProjectController = createProject(
+  "Master Project",
+  "This project has been created to give you access to Project.js file content",
+  9999,
+  true);
+const DisplayController = displaycontroller();
+
 const doneTaskListEle = document.querySelector('.list-done-tasks');
 const favTasksElement = document.querySelector('.fav-tasks-container');
 const projectsElement = document.querySelector('.progects-list');
 
-
-const tasks = JSON.parse(localStorage.getItem("tasks")).map(task =>
-  createTask(
-    task.title,
-    task.description,
-    task.priority,
-    task.dueDate,
-    task.projectId,
-    task.personId,
-    task.isChecked,
-    task.id,
-    true
-  )) || [];
-
-const projects = JSON.parse(localStorage.getItem("projects")).map(project =>
-  createProject(
-    project.name,
-    project.description,
-    project.id,
-    true
-  )) || [];
-
+const projects = JSON.parse(localStorage.getItem("projects")) || [];
 const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
 const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
-const btnToday = document.querySelector("#btn-today");
-const upcoming = document.querySelector("#btn-upcomming");
+
 const todoList = document.querySelector('.todo-list');
 const todoDashboardList = document.querySelector('.todo-dashboard-list');
-const inboxBtn = document.querySelector("#btn-inbox");
-const myProjectBtn = document.querySelector("#btn-projects");
-const archiveBtn = document.querySelector("#btn-archive");
-const doneTasksBtn = document.querySelector("#btn-done-tasks");
 const pageTitle = document.querySelector(".page-title");
 const dashboard = document.querySelector(".dashpoard-list");
 
-showSideItems(projects, projectsElement, "project");
-showSideItems(archiveTasks, favTasksElement, "task");
-showSideItems(doneTasks, doneTaskListEle, "task");
+DisplayController.showSideItems(projects, projectsElement, "project");
+DisplayController.showSideItems(archiveTasks, favTasksElement, "task");
+DisplayController.showSideItems(doneTasks, doneTaskListEle, "task");
 
 
 dashboard.addEventListener("click", (e) => {
@@ -111,67 +90,75 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function showPageContent(title) {
+
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const projects = JSON.parse(localStorage.getItem("projects")) || [];
+  const archiveTasks = JSON.parse(localStorage.getItem("archive")) || [];
+  const doneTasks = JSON.parse(localStorage.getItem("doneTasks")) || [];
+
   pageTitle.textContent = title;
   todoList.textContent = "";
 
   switch (title) {
     case "My Projects":
+
       todoDashboardList.textContent = "";
       todoList.textContent = "";
       for (let i = 0; i < projects.length; i++) {
-        projects[i].filterTasks(tasks, projects[i].id);
+        projects[i].tasksList = ProjectController.filterTasks(tasks, projects[i].id);
       }
-      showProjectsEle(projects, todoList);
+      localStorage.setItem("projects", JSON.stringify(projects));
+      DisplayController.showProjectsEle(projects, todoList);
       break;
 
     case "Done Tasks":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(JSON.parse(localStorage.getItem("doneTasks")), todoList);
+      DisplayController.showArchiveTasksEle(doneTasks, todoList);
       break;
 
     case "Dashboard":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
 
-      showTasksEle(JSON.parse(localStorage.getItem("tasks")), todoDashboardList);
+      DisplayController.showTasksEle(tasks, todoDashboardList);
       break;
 
     case "Archive":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(JSON.parse(localStorage.getItem("archive")), todoList);
+      DisplayController.showArchiveTasksEle(archiveTasks, todoList);
       break;
 
     case "Inbox":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(JSON.parse(localStorage.getItem("tasks")), todoList);
+      DisplayController.showArchiveTasksEle(tasks, todoList);
       break;
 
     case "Missing":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(getOverdueTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      DisplayController.showArchiveTasksEle(getOverdueTasks(tasks), todoList);
       break;
 
     case "Today Tasks":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      DisplayController.showArchiveTasksEle(getTodayTasks(tasks), todoList);
 
       break;
 
     case "Upcomming Tasks":
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      DisplayController.showArchiveTasksEle(getUpcomingTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
 
       break;
 
     default:
       todoDashboardList.textContent = "";
       todoList.textContent = "";
-      showArchiveTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
+      DisplayController.showArchiveTasksEle(getTodayTasks(JSON.parse(localStorage.getItem("tasks"))), todoList);
   }
 }
