@@ -1,5 +1,5 @@
 import { createProject } from "./project.js";
-import { showSideItems, showProjectsEle } from "./itemsDisplay.js";
+import { displaycontroller } from "./itemsDisplay.js";
 
 const openDialog = document.querySelector('.add-project');
 const dialogElem = document.getElementById("dialog-project");
@@ -11,6 +11,13 @@ const todoList = document.querySelector('.todo-list');
 const projectTitleInp = document.getElementById('title-project');
 const projectTextareaInp = document.getElementById('textarea-project');
 let projects;
+const DisplayController = displaycontroller();
+const ProjectController = createProject(
+  "Master Project",
+  "This project has been created to give you access to Project.js file content",
+  9999,
+  true
+);
 
 openDialog.addEventListener("click", () => {
   projects = JSON.parse(localStorage.getItem("projects"));
@@ -39,17 +46,18 @@ formSubmit.addEventListener("click", (e) => {
     projectsElement.textContent = "";
     todoList.textContent = "";
 
-    const filterTasksArray = project.filterTasks(JSON.parse(localStorage.
+    const filterTasksArray = ProjectController.filterTasks(JSON.parse(localStorage.
       getItem("tasks")), project.id);
 
     project.tasksList = filterTasksArray;
     projects.unshift(project);
+    
     localStorage.setItem("projects", JSON.stringify(projects));
 
-    showSideItems(JSON.parse(localStorage.
+    DisplayController.showSideItems(JSON.parse(localStorage.
       getItem("projects")), projectsElement, "project");
 
-    showProjectsEle(JSON.parse(localStorage.
+    DisplayController.showProjectsEle(JSON.parse(localStorage.
       getItem("projects")), todoList);
 
     dialogElem.close();

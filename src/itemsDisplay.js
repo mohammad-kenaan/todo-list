@@ -1,7 +1,18 @@
 import { createDetailedEle } from "./todoEle.js";
-import { createSummaryEle } from "./archiveEle.js";
+import { createSummaryEle } from "./summaryEle.js";
 import { createSideListEle } from "./sideListEle.js";
 import { createProjectEle } from "./projectEle.js";
+
+
+export function displaycontroller() {
+  return {
+    showTasksEle,
+    showArchiveTasksEle,
+    showProjectsEle,
+    showSideItems,
+    showSelecteOption
+  }
+}
 
 export function showTasksEle(tasksOfObj, HtmlEle) {
   tasksOfObj.forEach((task) => {

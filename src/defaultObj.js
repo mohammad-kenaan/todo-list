@@ -5,27 +5,35 @@ if (JSON.parse(localStorage.getItem("projects")) == undefined ||
   JSON.parse(localStorage.getItem("archive")) == undefined ||
   JSON.parse(localStorage.getItem("doneTasks")) == undefined ||
   JSON.parse(localStorage.getItem("tasks")) == undefined) {
-  createDefaultObjs();
+  restartAndCreateDefaultObjs();
   console.log("storage Empty");
 }
 
-//createDefaultObjs();
+//restartAndCreateDefaultObjs();
 
-function createDefaultObjs() {
+function restartAndCreateDefaultObjs() {
   const tasks = [];
   const projects = [];
-  localStorage.setItem("taskIdCounter", JSON.stringify(0));
-  localStorage.setItem("projectIdCounter", JSON.stringify(0));
 
+
+  const projectCounterStart = JSON.parse(localStorage.getItem("projects")).length || 10;
+  
+  const taskCounterStart = JSON.parse(localStorage.getItem("tasks")).length || 10;
+
+  localStorage.setItem("taskIdCounter", JSON.stringify(taskCounterStart));
+  localStorage.setItem("projectIdCounter", JSON.stringify(projectCounterStart));
+ 
   let task1 = createTask(
     "Task Title: Create Home Page",
     `Design and implement the main landing page with hero section, 
     navigation bar, and call-to-action button!.`,
-    "Priority: High",
+    2,
     new Date().toISOString(),
     1,
     0,
     false,
+    1,
+    true
   );
   task1.belongTo = "Web Development";
 
@@ -33,11 +41,13 @@ function createDefaultObjs() {
     "Task Title: Design Contact Page",
     `Build a responsive contact form with name, email, message fields, and
      form validation.`,
-    "Priority: Medium",
+    2,
     new Date().toISOString(),
     1,
     0,
     false,
+    2,
+    true
   );
   task2.belongTo = "Web Development";
 
@@ -45,11 +55,13 @@ function createDefaultObjs() {
     "Task Title: Build About Page",
     `Add company information, team section, and mission statement 
     with proper layout and styling.`,
-    "Priority: Low",
+    6,
     new Date(2025, 10, 6, 9, 0).toISOString(),
     1,
     0,
     false,
+    3,
+    true
   );
   task3.belongTo = "Web Development";
 
@@ -57,11 +69,13 @@ function createDefaultObjs() {
     "Task Title: Add Navbar Component",
     `Develop a reusable navigation bar component with dropdown support and 
     active link highlighting.`,
-    "Priority: High",
+    8,
     new Date(2025, 11, 15, 9, 0).toISOString(),
     1,
     0,
     false,
+    4,
+    true
   );
   task4.belongTo = "Web Development";
 
@@ -70,11 +84,13 @@ function createDefaultObjs() {
     "Task Title: Implement Footer Section",
     `Create a footer with social media links, contact info, and copyright text,
      consistent across all pages.`,
-    "Priority: Medium",
+    5,
     new Date(2025, 10, 10, 9, 0).toISOString(),
     1,
     0,
     false,
+    5,
+    true
   );
   task5.belongTo = "Web Development";
 
@@ -83,11 +99,13 @@ function createDefaultObjs() {
     "Task Title: Setup Network Topology",
     `Design and configure the physical and logical topology for the office
      LAN including switches, routers, and cabling.`,
-    "Priority: High",
+    7,
     new Date(2025, 10, 7, 9, 0).toISOString(),
     2,
     0,
     false,
+    6,
+    true
   );
   task6.belongTo = "Information Technology";
 
@@ -96,11 +114,13 @@ function createDefaultObjs() {
     "Task Title: Configure VLANs",
     `Create and assign VLANs on managed switches to segment network traffic
      based on department or function.",
-    "Priority: High`,
+    8`,
     new Date(2025, 10, 12, 9, 0).toISOString(),
     2,
     0,
     false,
+    7,
+    true
   );
   task7.belongTo = "Information Technology";
 
@@ -109,11 +129,13 @@ function createDefaultObjs() {
     "Task Title: Setup DHCP and DNS Services",
     `Install and configure DHCP and DNS servers to automate IP management and
      name resolution within the network.`,
-    "Priority: Medium",
+    9,
     new Date(2025, 10, 13, 9, 0).toISOString(),
     2,
     0,
     false,
+    8,
+    true
   );
   task8.belongTo = "Information Technology";
 
@@ -122,11 +144,13 @@ function createDefaultObjs() {
     "Task Title: Implement Firewall Rules",
     `Define and apply firewall rules to control inbound and outbound traffic,
      ensuring security and compliance.`,
-    "Priority: High",
+    9,
     new Date(2025, 10, 6, 9, 0).toISOString(),
     2,
     0,
     false,
+    9,
+    true
   );
   task9.belongTo = "Information Technology";
 
@@ -135,11 +159,13 @@ function createDefaultObjs() {
     "Task Title: Perform Network Testing",
     `Verify connectivity, measure latency, and ensure that all devices 
     communicate properly across the network segments.`,
-    "Priority: Medium",
+    4,
     new Date(2025, 10, 11, 9, 0).toISOString(),
     2,
     0,
     true,
+    10,
+    true
   );
   task10.belongTo = "Information Technology";
 
@@ -148,11 +174,13 @@ function createDefaultObjs() {
     "Task Title: Design System Architecture",
     `Define the overall system architecture including modules, data flow, and
      integration points using UML diagrams.`,
-    "Priority: High",
+    6,
     new Date(2025, 10, 8, 9, 0).toISOString(),
     3,
     0,
     false,
+    11,
+    true
   );
 
   task11.belongTo = "Software Eng";
@@ -160,22 +188,26 @@ function createDefaultObjs() {
   let task12 = createTask(
     "Task Title: Implement Authentication Module",
     "Develop a secure user authentication and authorization module with password hashing and session management.",
-    "Priority: High",
+    5,
     new Date(2025, 11, 8, 9, 0).toISOString(),
     3,
     0,
     false,
+    12,
+    true
   );
   task12.belongTo = "Software Eng";
 
   let task13 = createTask(
     "Task Title: Write Unit Tests",
     "Create unit tests for core functionalities to ensure code reliability and maintainability using a testing framework.",
-    "Priority: Medium",
+    4,
     new Date(2025, 10, 9, 9, 0).toISOString(),
     3,
     0,
     false,
+    13,
+    true
   );
   task13.belongTo = "Software Eng";
 
@@ -189,19 +221,30 @@ function createDefaultObjs() {
 
   const project1 = createProject(
     "Web Development",
-    "In this Project we will focuse on Learn HTML");
+    "In this Project we will focuse on Learn HTML",
+    1,
+    true
+  );
 
   const project2 = createProject(
     "Information Technology",
-    "In this Project we will focuse on Learn Networking");
+    "In this Project we will focuse on Learn Networking",
+    2,
+    true
+  );
 
   const project3 = createProject(
     "Software Eng",
-    "In this Project we will focuse on Learn Problem Solving");
+    "In this Project we will focuse on Learn Problem Solving",
+    3,
+    true
+  );
 
   const general = createProject(
     "General",
     "Tasks not assigned to any project yet.",
+    4,
+    true
   );
 
   projects.push(project1, project2, project3, general);
@@ -215,4 +258,3 @@ function createDefaultObjs() {
   localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
 
 }
-

@@ -71,9 +71,13 @@ function filterProjects(projectsArr, id) {
 }
 
 function generateTaskId(importedFromLocal) {
+
   if (importedFromLocal === false) {
+
+    const taskCounterStart = JSON.parse(localStorage.getItem("tasks")).length || 10;
+
     if (!localStorage.getItem("taskIdCounter")) {
-      localStorage.setItem("taskIdCounter", JSON.stringify(0));
+      localStorage.setItem("taskIdCounter", JSON.stringify(taskCounterStart));
     }
 
     let counter = JSON.parse(localStorage.getItem("taskIdCounter"));
